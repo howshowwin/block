@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1479px"
+	 height="696.231px" viewBox="0 0 1479 696.231" enable-background="new 0 0 1479 696.231" xml:space="preserve">
+<g id="BG">
+	<g>
+		<path opacity="0.2" fill="#231815" d="M1479,679.521c0,9.232-7.434,16.715-16.604,16.715H16.604
+			C7.435,696.235,0,688.753,0,679.521V16.719C0,7.488,7.435,0.004,16.604,0.004h1445.792c9.171,0,16.604,7.484,16.604,16.715
+			V679.521z"/>
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="738.8267" y1="2.6709" x2="738.8267" y2="691.2095">
+			<stop  offset="0.2849" style="stop-color:#EFEFEF"/>
+			<stop  offset="0.6452" style="stop-color:#B5B5B6"/>
+			<stop  offset="0.6882" style="stop-color:#C0C0C1"/>
+			<stop  offset="0.8074" style="stop-color:#DADADA"/>
+			<stop  offset="0.9149" style="stop-color:#EAEAEA"/>
+			<stop  offset="1" style="stop-color:#EFEFEF"/>
+		</linearGradient>
+		<path fill="url(#SVGID_1_)" d="M1475.017,674.68c0,9.129-7.4,16.529-16.53,16.529H19.166c-9.129,0-16.529-7.4-16.529-16.529
+			V19.201c0-9.128,7.4-16.53,16.529-16.53h1439.32c9.13,0,16.53,7.401,16.53,16.53V674.68z"/>
+		<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="738.8267" y1="682.1982" x2="738.8267" y2="9.6826">
+			<stop  offset="0" style="stop-color:#DCDDDD"/>
+			<stop  offset="0.4462" style="stop-color:#EFEFEF"/>
+			<stop  offset="0.8065" style="stop-color:#B5B5B6"/>
+		</linearGradient>
+		<path fill="url(#SVGID_2_)" d="M1462.808,666.005c0,8.943-7.25,16.193-16.194,16.193H31.039c-8.943,0-16.193-7.25-16.193-16.193
+			V25.875c0-8.944,7.25-16.193,16.193-16.193h1415.574c8.944,0,16.194,7.25,16.194,16.193V666.005z"/>
+		<path fill="#FFFFFF" d="M1451.645,658.381c0,8.842-7.168,16.01-16.011,16.01H42.019c-8.841,0-16.01-7.168-16.01-16.01V35.499
+			c0-8.842,7.169-16.009,16.01-16.009h1393.615c8.843,0,16.011,7.167,16.011,16.009V658.381z"/>
+	</g>
+</g>
+<g id="UI">
+</g>
+<g id="_x24_">
+</g>
+<g id="選單">
+</g>
+</svg>

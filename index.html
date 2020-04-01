@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數學小工具積木</title>
+    <link rel="stylesheet" href="css/block.css">
+    <style>
+        .boxbox {
+            position: absolute;
+            z-index: 999;
+            height: 1000px;
+            width: 500px;
+            background: url(../img/bar1.svg);
+            background-position: 0 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-img"></div>
+    <div class="background">
+
+        <div class="showbox"></div>
+
+        <div class="changeMoneyAreaTop"></div>
+        <div class="changeMoneyAreaBottom"></div>
+        <canvas id="canvas" class=""></canvas>
+
+        <div class="change_btn"></div>
+        <div class="close_btn"></div>
+        <div class="useteach"></div>
+        <div class="countpic"></div>
+        <div class="delete_btn"></div>
+        <div class="inputarea inputarea1"></div>
+        <div class="inputarea inputarea2"></div>
+        <div class="inputarea inputarea3"></div>
+        <div class="inputarea inputarea4"></div>
+
+        <div class="arrow arrow1"></div>
+        <div class="arrow arrow2"></div>
+        <div class="arrow arrow3"></div>
+        <div class="arrow arrow4"></div>
+        <div class="dragselected"></div>
+        <div class="box">
+            <div class="img_box"></div>
+
+        </div>
+        <div class="mask display_none">
+            <div class="info">
+                <div class="btn_close_inset"></div>
+            </div>
+        </div>
+        <div class="selectedframe">
+        </div>
+
+
+        <div class="movetopbtn"></div>
+        <div class="movedownbtn"></div>
+
+        <img class="img_thd img_block defaultImg" src="img/cc1000.svg" alt="1000" draggable>
+        <img class="img_hun img_block defaultImg" src="img/cc100.svg" alt="100" draggable>
+        <img class="img_ten img_block defaultImg" src="img/cc10.svg" alt="10" draggable>
+        <img class="img_one img_block defaultImg" src="img/cc1.svg" alt="1" draggable>
+        <div class="choosenum choosenum1" data-amount="thd">
+            <div class="numberframe">
+                <div class="numlist" data-numval="10">10</div>
+                <div class="numlist" data-numval="9">9</div>
+                <div class="numlist" data-numval="8">8</div>
+                <div class="numlist" data-numval="7">7</div>
+                <div class="numlist" data-numval="6">6</div>
+                <div class="numlist" data-numval="5">5</div>
+                <div class="numlist" data-numval="4">4</div>
+                <div class="numlist" data-numval="3">3</div>
+                <div class="numlist" data-numval="2">2</div>
+                <div class="numlist" data-numval="1">1</div>
+
+            </div>
+        </div>
+        <div class="choosenum choosenum2" data-amount="hrd">
+            <div class="numberframe">
+                <div class="numlist" data-numval="10">10</div>
+                <div class="numlist" data-numval="9">9</div>
+                <div class="numlist" data-numval="8">8</div>
+                <div class="numlist" data-numval="7">7</div>
+                <div class="numlist" data-numval="6">6</div>
+                <div class="numlist" data-numval="5">5</div>
+                <div class="numlist" data-numval="4">4</div>
+                <div class="numlist" data-numval="3">3</div>
+                <div class="numlist" data-numval="2">2</div>
+                <div class="numlist" data-numval="1">1</div>
+
+            </div>
+        </div>
+        <div class="choosenum choosenum3" data-amount="ten">
+            <div class="numberframe">
+                <div class="numlist" data-numval="10">10</div>
+                <div class="numlist" data-numval="9">9</div>
+                <div class="numlist" data-numval="8">8</div>
+                <div class="numlist" data-numval="7">7</div>
+                <div class="numlist" data-numval="6">6</div>
+                <div class="numlist" data-numval="5">5</div>
+                <div class="numlist" data-numval="4">4</div>
+                <div class="numlist" data-numval="3">3</div>
+                <div class="numlist" data-numval="2">2</div>
+                <div class="numlist" data-numval="1">1</div>
+
+            </div>
+        </div>
+        <div class="choosenum choosenum4" data-amount="one">
+            <div class="numberframe">
+                <div class="numlist" data-numval="10">10</div>
+                <div class="numlist" data-numval="9">9</div>
+                <div class="numlist" data-numval="8">8</div>
+                <div class="numlist" data-numval="7">7</div>
+                <div class="numlist" data-numval="6">6</div>
+                <div class="numlist" data-numval="5">5</div>
+                <div class="numlist" data-numval="4">4</div>
+                <div class="numlist" data-numval="3">3</div>
+                <div class="numlist" data-numval="2">2</div>
+                <div class="numlist" data-numval="1">1</div>
+
+            </div>
+        </div>
+        <input class="count" type="text" value="0" oninput="aa(event)" onporpertychange="aa(event)">
+
+        <!-- 手打輸入文字 -->
+        <input class="enter_thd enter_input" type="text" value="" oninput="bb(event)" onporpertychange="bb(event)">
+        <input class="enter_hrd enter_input" type="text" value="" oninput="cc(event)" onporpertychange="cc(event)">
+        <input class="enter_ten enter_input" type="text" value="" oninput="dd(event)" onporpertychange="dd(event)">
+        <input class="enter_one enter_input" type="text" value="" oninput="ee(event)" onporpertychange="ee(event)">
+
+
+
+    </div>
+
+
+    <!-- <div class="background1"> </div> -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/fabric.min.js"></script>
+    <script src="js/customiseControls.js"></script>
+    <script src="js/resize.js"></script>
+    <script src="js/dragitem.js"></script>
+    <script src="js/inputallappend.js"></script>
+    <script src="js/clickfunction.js"></script>
+    <script src="js/append.js"></script>
+
+</body>
+
+</html>
