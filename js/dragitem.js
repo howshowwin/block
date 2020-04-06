@@ -53,7 +53,7 @@ function saveFoneImg(e) {
 
 
     copyObj.style.top = e.targetTouches[0].clientY - e.target.height / 2 + "px"
-    copyObj.style.left = e.targetTouches[0].clientX - e.target.width / 2 - spcial_move + "px"
+    copyObj.style.left = e.targetTouches[0].clientX - e.target.width / 2  + "px"
     jijo = copyObj
     canvas.discardActiveObject();
     canvas.renderAll();
@@ -64,10 +64,9 @@ function drag(e) {
 
 
     e.preventDefault();
-    jijo.style.transition = "none"
 
     jijo.style.top = e.targetTouches[0].clientY - e.target.height / 2 + "px"
-    jijo.style.left = e.targetTouches[0].clientX - e.target.width / 2 - spcial_move + "px"
+    jijo.style.left = e.targetTouches[0].clientX - e.target.width / 2  + "px"
 
     odX = e.targetTouches[0].clientX - e.target.width / 2
     odY = e.targetTouches[0].clientY - e.target.height / 2
@@ -76,47 +75,96 @@ var push = false
 var image_q = new Array()
 
 function pushimg(e) {
-    let yoyo = $('.canvas_wrapper').offset().left
-    let yoyot = $('.canvas_wrapper').offset().top
+    // let yoyo = $('.canvas-container').offset().left
+    // let yoyot = $('.canvas-container').offset().top
 
-    let offsetY = odY
-    let offsetX = odX
+    // let offsetY = odY
+    // let offsetX = odX
     document.body.removeChild(jijo);
-    let h
-    if (e.changedTouches[0].clientY - yoyot - e.target.height / 2 < 0) {
-        h = 35
-    } else if ((e.changedTouches[0].clientY - yoyot - e.target.height / 2 + e.target.height) > ($('.canvas_wrapper').height())) {
-        h = $('.canvas_wrapper').height() - e.target.height - 20
-    } else {
-        h = e.changedTouches[0].clientY - yoyot - e.target.height / 2
+    // let h
+    // if (e.changedTouches[0].clientY - yoyot - e.target.height / 2 < 0) {
+    //     h = 35
+    // } else if ((e.changedTouches[0].clientY - yoyot - e.target.height / 2 + e.target.height) > ($('.canvas_wrapper').height())) {
+    //     h = $('.canvas_wrapper').height() - e.target.height - 20
+    // } else {
+    //     h = e.changedTouches[0].clientY - yoyot - e.target.height / 2
+    // }
+    // let w
+    // if (e.changedTouches[0].clientX - yoyo - e.target.width / 2 < 0) {
+    //     w = 0
+    // }
+    // else if (e.changedTouches[0].clientX - yoyo - e.target.width / 2 + e.target.width > ($('.canvas_wrapper').width())) {
+    //     w = $('.canvas_wrapper').width() * 999 + e.target.width / 2
+    // }
+    // else {
+    //     w = e.changedTouches[0].clientX - yoyo - e.target.width
+    // }
+
+    // const { offsetX, offsetY } = e.e
+
+
+    // cursor_padding
+    // obj_padding
+    var oriTop = e.changedTouches[0].clientY  - e.target.height 
+    var oriLeft = e.changedTouches[0].clientX - e.target.width 
+    // if()
+    var mix_padding = (obj_padding) + (cursor_padding / 2)
+    // var mix_padding = 0
+
+
+    if (oriTop - mix_padding < 0) {
+        oriTop = mix_padding 
     }
-    let w
-    if (e.changedTouches[0].clientX - yoyo - e.target.width / 2 < 0) {
-        w = 0
+    if (oriLeft <0) {
+        oriLeft = 0
     }
-    else if (e.changedTouches[0].clientX - yoyo - e.target.width / 2 + e.target.width > ($('.canvas_wrapper').width())) {
-        w = $('.canvas_wrapper').width() * 999 + e.target.width / 2
+    if (oriTop + movingImage.height > $('.canvas-container').height()) {
+        oriTop = $('.canvas-container').height() - movingImage.height 
     }
-    else {
-        w = e.changedTouches[0].clientX - yoyo - e.target.width
+    if (oriLeft + movingImage.width + mix_padding > $('.canvas-container').width()*0.788) {
+        oriLeft = $('.canvas-container').width()*0.788 - movingImage.width - mix_padding
     }
+
+
+
+
+
+
+
+
     const image_qq = new fabric.Image(movingImage, {
         width: movingImage.naturalWidth,
         height: movingImage.naturalHeight,
         scaleX: movingImage.width / movingImage.naturalWidth,
         scaleY: movingImage.height / movingImage.naturalHeight,
-        top: h,
-        left: w + movingImage.naturalWidth / 4,
+        top: oriTop,
+        left: oriLeft,
         lockScalingFlip: true
     })
 
 
     image_qq.set({
-        borderColor: 'rgba(0,0,0,0)'
+        borderColor: '#01B0F1'
     })
+
     canvas.add(image_qq)
 
     image_q.push(image_qq)
+    movingImage = ""
+    setTimeout(function ww() {
+        var items = canvas.getObjects()
+        var Array_sum
+        var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+        for (i = 0; i < items.length; i++) {
+            ArrTest[i] = parseInt(items[i]._element.alt)
+
+        }
+        Array_sum = SumData(ArrTest)
+        $(".count").val(Array_sum)
+    }, 500)
+
+    
 }
 
 
