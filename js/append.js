@@ -4,8 +4,8 @@ var ten_number
 var one_number
 var redcount = -1
 var bluecount = 0
-var yellowcount = 1
-var greencount = 2
+var yellowcount = 3
+var greencount = 4
 var redlittlemove = 0
 var bluelittlemove = 0
 var yellowlittlemove = 0
@@ -221,7 +221,7 @@ function appendblock() {
     if (ten_number != "") {
         yellowcount += 1
     }
-    if (yellowcount > 4.8) {
+    if (yellowcount > 7.5) {
         yellowcount = 0
         yellowlittlemove += 10
     }
@@ -265,7 +265,7 @@ function appendblock() {
             image._element.alt = '10'
             arr_three.push(image)
             numnum2++
-            var maxWidthyellow = Math.round(265 * sRSS)
+            var maxWidthyellow = Math.round(160 * sRSS)
             // for (i = 0; i < arr_two.length; i++) {
             if (arr_three.length <= 5) {
                 s_1 += 10
@@ -277,7 +277,7 @@ function appendblock() {
 
                     easing: fabric.util.ease.easeInOutExpo
                 })
-                image.animate('left', (Math.round(120 * sRSS)) + (Math.round(20 * sRSS)) + (maxWidthyellow * yellowcount) + (Math.round(yellowlittlemove * sRSS)), {
+                image.animate('left', (Math.round(40 * sRSS)) + (Math.round(20 * sRSS)) + (maxWidthyellow * yellowcount) + (Math.round(yellowlittlemove * sRSS)), {
                     duration: 800 + s_1,
                     onChange: canvas.renderAll.bind(canvas),
 
@@ -293,7 +293,7 @@ function appendblock() {
 
                     easing: fabric.util.ease.easeInOutExpo
                 })
-                image.animate('left', (Math.round(230 * sRSS)) + (Math.round(20 * sRSS)) + (maxWidthyellow * yellowcount) + (Math.round(yellowlittlemove * sRSS)), {
+                image.animate('left', (Math.round(120 * sRSS)) + (Math.round(20 * sRSS)) + (maxWidthyellow * yellowcount) + (Math.round(yellowlittlemove * sRSS)), {
                     duration: 800 + s_1,
                     onChange: canvas.renderAll.bind(canvas),
 
@@ -315,7 +315,7 @@ function appendblock() {
     if (one_number != "") {
         greencount += 1
     }
-    if (greencount > 4.8) {
+    if (greencount > 7.5) {
         greencount = 0
         greenlittlemove += 10
     }
@@ -359,19 +359,19 @@ function appendblock() {
             image._element.alt = '1'
             arr_four.push(image)
             numnum3++
-            var maxWidthgreen = Math.round(265 * sRSS)
+            var maxWidthgreen = Math.round(160 * sRSS)
             // for (i = 0; i < arr_two.length; i++) {
             if (arr_four.length <= 5) {
                 s_1 += 10
 
 
-                image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * numnum3, {
+                image.animate('top', Math.round(40 * sRSS) + Math.round(80 * sRSS) * numnum3, {
                     duration: 800 + s_1,
                     onChange: canvas.renderAll.bind(canvas),
 
                     easing: fabric.util.ease.easeInOutExpo
                 })
-                image.animate('left', (Math.round(65 * sRSS)) + (Math.round(30 * sRSS)) + (maxWidthgreen * greencount) + (Math.round(greenlittlemove * sRSS)), {
+                image.animate('left', (Math.round(85 * sRSS)) + (Math.round(30 * sRSS)) + (maxWidthgreen * greencount) + (Math.round(greenlittlemove * sRSS)), {
                     duration: 800 + s_1,
                     onChange: canvas.renderAll.bind(canvas),
 
@@ -381,13 +381,13 @@ function appendblock() {
                 s_1_1 += 10
 
 
-                image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * (numnum3 - 5), {
+                image.animate('top', Math.round(40 * sRSS) + Math.round(80 * sRSS) * (numnum3 - 5), {
                     duration: 800 + s_1,
                     onChange: canvas.renderAll.bind(canvas),
 
                     easing: fabric.util.ease.easeInOutExpo
                 })
-                image.animate('left', (Math.round(185 * sRSS)) + (Math.round(30 * sRSS)) + (maxWidthgreen * greencount) + (Math.round(greenlittlemove * sRSS)), {
+                image.animate('left', (Math.round(160 * sRSS)) + (Math.round(30 * sRSS)) + (maxWidthgreen * greencount) + (Math.round(greenlittlemove * sRSS)), {
                     duration: 800 + s_1,
                     onChange: canvas.renderAll.bind(canvas),
 
