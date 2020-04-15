@@ -560,7 +560,9 @@ canvas.on('object:selected', e => {
 })
 
 
-
+canvas.on('selection:cleared',e =>{
+    objseleted = 0
+})
 
 
 
