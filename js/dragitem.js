@@ -53,7 +53,7 @@ function saveFoneImg(e) {
 
 
     copyObj.style.top = e.targetTouches[0].clientY - e.target.height / 2 + "px"
-    copyObj.style.left = e.targetTouches[0].clientX - e.target.width / 2  + "px"
+    copyObj.style.left = e.targetTouches[0].clientX - e.target.width / 2 + "px"
     jijo = copyObj
     canvas.discardActiveObject();
     canvas.renderAll();
@@ -66,7 +66,7 @@ function drag(e) {
     e.preventDefault();
 
     jijo.style.top = e.targetTouches[0].clientY - e.target.height / 2 + "px"
-    jijo.style.left = e.targetTouches[0].clientX - e.target.width / 2  + "px"
+    jijo.style.left = e.targetTouches[0].clientX - e.target.width / 2 + "px"
 
     odX = e.targetTouches[0].clientX - e.target.width / 2
     odY = e.targetTouches[0].clientY - e.target.height / 2
@@ -105,24 +105,24 @@ function pushimg(e) {
 
     // cursor_padding
     // obj_padding
-    var oriTop = e.changedTouches[0].clientY  - e.target.height 
-    var oriLeft = e.changedTouches[0].clientX - e.target.width 
+    var oriTop = e.changedTouches[0].clientY - e.target.height
+    var oriLeft = e.changedTouches[0].clientX - e.target.width
     // if()
     var mix_padding = (obj_padding) + (cursor_padding / 2)
     // var mix_padding = 0
 
 
     if (oriTop - mix_padding < 0) {
-        oriTop = mix_padding 
+        oriTop = mix_padding
     }
-    if (oriLeft <0) {
+    if (oriLeft < 0) {
         oriLeft = 0
     }
     if (oriTop + movingImage.height > $('.canvas-container').height()) {
-        oriTop = $('.canvas-container').height() - movingImage.height 
+        oriTop = $('.canvas-container').height() - movingImage.height
     }
-    if (oriLeft + movingImage.width + mix_padding > $('.canvas-container').width()*0.788) {
-        oriLeft = $('.canvas-container').width()*0.788 - movingImage.width - mix_padding
+    if (oriLeft + movingImage.width + mix_padding > $('.canvas-container').width() * 0.788) {
+        oriLeft = $('.canvas-container').width() * 0.788 - movingImage.width - mix_padding
     }
 
 
@@ -164,7 +164,7 @@ function pushimg(e) {
         $(".count").val(Array_sum)
     }, 500)
 
-    
+
 }
 
 
@@ -185,16 +185,16 @@ function dropImg(e) {
 
 
     if (oriTop - mix_padding < 0) {
-        oriTop = mix_padding 
+        oriTop = mix_padding
     }
-    if (oriLeft <0) {
-        oriLeft = 0
+    if (oriLeft - mix_padding < 0) {
+        oriLeft = mix_padding
     }
     if (oriTop + movingImage.height > $('.canvas-container').height()) {
-        oriTop = $('.canvas-container').height() - movingImage.height 
+        oriTop = $('.canvas-container').height() - movingImage.height
     }
-    if (oriLeft + movingImage.width + mix_padding > $('.canvas-container').width()*0.788) {
-        oriLeft = $('.canvas-container').width()*0.788 - movingImage.width - mix_padding
+    if (oriLeft + movingImage.width + mix_padding > $('.canvas-container').width() * 0.788) {
+        oriLeft = $('.canvas-container').width() * 0.788 - movingImage.width - mix_padding
     }
     const image_qq = new fabric.Image(movingImage, {
         width: movingImage.naturalWidth,
@@ -235,6 +235,7 @@ function dropImg(e) {
 //     e.preventDefault();
 // };
 
+var toucharea =  document.querySelector(".box")
 canvas.on('drop', dropImg)
 
 $('.defaultImg').mousedown(function () {
@@ -243,3 +244,81 @@ imgset.addEventListener('touchstart', saveFoneImg)
 imgset.addEventListener("touchmove", drag);
 imgset.addEventListener("touchend", pushimg);
 
+
+
+
+
+
+
+var startx, starty;
+//獲得角度
+function getAngle(angx, angy) {
+    return Math.atan2(angy, angx) * 180 / Math.PI;
+};
+
+//根據起點終點返回方向 1向上 2向下 3向左 4向右 0未滑動
+function getDirection(startx, starty, endx, endy) {
+    var angx = endx - startx;
+    var angy = endy - starty;
+    var result = 0;
+
+    //如果滑動距離太短
+    if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
+        return result;
+    }
+
+    var angle = getAngle(angx, angy);
+    if (angle >= -135 && angle <= -45) {
+        result = 1;
+    } else if (angle > 45 && angle < 135) {
+        result = 2;
+    } else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
+        result = 3;
+    } else if (angle >= -45 && angle <= 45) {
+        result = 4;
+    }
+
+    return result;
+}
+//手指接觸螢幕
+toucharea.addEventListener("touchstart", function(e) {
+    startx = e.touches[0].pageX;
+    starty = e.touches[0].pageY;
+}, false);
+//手指離開螢幕
+toucharea.addEventListener("touchend", function(e) {
+    var endx, endy;
+    endx = e.changedTouches[0].pageX;
+    endy = e.changedTouches[0].pageY;
+    var direction = getDirection(startx, starty, endx, endy);
+    switch (direction) {
+        case 0:
+            alert("未滑動！");
+            break;
+        case 1:
+            var bgP = $('.img_box').css('backgroundSize')
+            var jj = bgP.slice(5, 15)
+            stagenum = parseInt(jj) / 4 + stagenum
+        
+            $('.img_box').css({
+                backgroundPosition: `0 ${Math.round(30 * sRSS) + stagenum}px`
+            })
+        
+            break;
+        case 2:
+            var bgP = $('.img_box').css('backgroundSize')
+            var jj = bgP.slice(5, 15)
+            stagenum = stagenum - parseInt(jj) / 4
+        
+            // //當滑輪向上滾動時 
+            $('.img_box').css({
+                backgroundPosition: `0 ${Math.round(30 * sRSS) + stagenum}px`
+            })
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        default:
+    }
+}, false);

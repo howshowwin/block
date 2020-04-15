@@ -81,7 +81,7 @@ function idontknowwhatiwrite() {
         var s_1_1 = 0
         // var w = 0 
         const imgEl_1 = document.createElement('img')
-        imgEl_1.src = "img/cc1000.svg"
+        imgEl_1.src = "img/newc1000.svg"
         imgEl_1.alt = '1000'
 
         imgEl_1.onload = (e) => {
@@ -118,7 +118,7 @@ function idontknowwhatiwrite() {
                 s_1 += 10
 
 
-                image.animate('top', 30 * sRSS + 120 * sRSS * numnum, {
+                image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
                     duration: 800 + s_1,
                     onChange: canvas.renderAll.bind(canvas),
 
@@ -134,7 +134,7 @@ function idontknowwhatiwrite() {
                 s_1_1 += 10
 
 
-                image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 5), {
+                image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
                     duration: 800 + s_1,
                     onChange: canvas.renderAll.bind(canvas),
 
@@ -174,7 +174,7 @@ var s_1 = 0
 var s_1_1 = 0
 // var w = 0 
 const imgEl_1 = document.createElement('img')
-imgEl_1.src = "img/cc100.svg"
+imgEl_1.src = "img/newc100.svg"
 imgEl_1.alt = '100'
 
 imgEl_1.onload = (e) => {
@@ -210,7 +210,7 @@ imgEl_1.onload = (e) => {
         s_1 += 10
 
 
-        image.animate('top', Math.round(30 * sRSS) + Math.round(120 * sRSS) * numnum1, {
+        image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * numnum1, {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
@@ -226,7 +226,7 @@ imgEl_1.onload = (e) => {
         s_1_1 += 10
 
 
-        image.animate('top', Math.round(30 * sRSS) + Math.round(120 * sRSS) * (numnum1 - 5), {
+        image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * (numnum1 - 5), {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
@@ -270,7 +270,7 @@ var s_1 = 0
 var s_1_1 = 0
 // var w = 0 
 const imgEl_1 = document.createElement('img')
-imgEl_1.src = "img/cc10.svg"
+imgEl_1.src = "img/newc10.svg"
 imgEl_1.alt = '10'
 
 imgEl_1.onload = (e) => {
@@ -306,7 +306,7 @@ imgEl_1.onload = (e) => {
         s_1 += 10
 
 
-        image.animate('top', Math.round(30 * sRSS) + Math.round(120 * sRSS) * numnum2, {
+        image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * numnum2, {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
@@ -322,7 +322,7 @@ imgEl_1.onload = (e) => {
         s_1_1 += 10
 
 
-        image.animate('top', Math.round(30 * sRSS) + Math.round(120 * sRSS) * (numnum2 - 5), {
+        image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * (numnum2 - 5), {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
@@ -364,7 +364,7 @@ var s_1 = 0
 var s_1_1 = 0
 // var w = 0 
 const imgEl_1 = document.createElement('img')
-imgEl_1.src = "img/cc1.svg"
+imgEl_1.src = "img/newc1.svg"
 imgEl_1.alt = '1'
 
 imgEl_1.onload = (e) => {
@@ -400,7 +400,7 @@ imgEl_1.onload = (e) => {
         s_1 += 10
 
 
-        image.animate('top', Math.round(30 * sRSS) + Math.round(120 * sRSS) * numnum3, {
+        image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * numnum3, {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
@@ -416,7 +416,7 @@ imgEl_1.onload = (e) => {
         s_1_1 += 10
 
 
-        image.animate('top', Math.round(30 * sRSS) + Math.round(120 * sRSS) * (numnum3 - 5), {
+        image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * (numnum3 - 5), {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 

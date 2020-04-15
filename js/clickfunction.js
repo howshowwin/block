@@ -211,11 +211,34 @@ $('body').bind('click', function (event) {
         clickDisplayNoneOne = 0
     }
 });
-
+var togglecount = 0
+$('.openorclosecount_btn').click(function () {
+    if (togglecount == 0) {
+        $('.count').removeClass('display_none')
+        $(this).css({
+            background: "url(img/newbox3-1.svg)",
+            backgroundSize: "cover"
+        })
+        togglecount = 1
+    } else {
+        $('.count').addClass('display_none')
+        $(this).css({
+            background: "url(img/newbox3-2.svg)",
+            backgroundSize: "cover"
+        })
+        togglecount = 0
+    }
+})
 $('.numlist').click(function () {
     let showClick = $(this).data("numval")
     let amount = $(this).closest(".choosenum").data("amount")
     $(`.enter_${amount}`).val(showClick == 10 ? "+10" : `+${showClick}`)
+
+    appendblock()
+})
+
+$('.enter_input').blur(function () {
+    appendblock()
 
 })
 function SumData(arr) {
@@ -231,6 +254,34 @@ $(".count").bind('input porpertychange', function () {
         $('.count').val(10999)
     }
 })
+$('.count').focus(function () {
+    $('.count').val("")
+})
+$('.count').blur(function () {
+    if ($('.count').val() == "") {
+        setTimeout(function ww() {
+            var items = canvas.getObjects()
+            var Array_sum
+            var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+            for (i = 0; i < items.length; i++) {
+                ArrTest[i] = parseInt(items[i]._element.alt)
+
+            }
+            Array_sum = SumData(ArrTest)
+            $(".count").val(Array_sum)
+        }, 500)
+    } else {
+        canvas.clear();
+
+        idontknowwhatiwrite()
+        $('.enter_thd').val('')
+        $('.enter_hrd').val('')
+        $('.enter_ten').val('')
+        $('.enter_one').val('')
+    }
+})
+
 $('.useteach').click(function () {
     $('.mask').removeClass("display_none")
 })
@@ -285,6 +336,18 @@ $('.close_btn').click(function () {
 
 
 
+
+fabric.Object.prototype.setControlsVisibility({
+    bl: true, // 左下
+    br: true, // 右下
+    mb: false, // 下中
+    ml: false, // 中左
+    mr: false, // 中右
+    mt: false, // 上中
+    tl: false, // 上左
+    tr: true, // 上右
+    mtr: false // 旋轉控制鍵
+})
 fabric.Canvas.prototype.customiseControls({
     tl: {
         action: function () {
@@ -292,89 +355,15 @@ fabric.Canvas.prototype.customiseControls({
         }
     },
     tr: {
-        action: function (e) {
-            // var activeObject = canvas.getActiveObject()
-            // if (activeObject) {
-            //         canvas.remove(activeObject);
-            // }
-            setTimeout(function ww() {
-                var items = canvas.getObjects()
-                var Array_sum
-                var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+        action: function () {
 
-                for (i = 0; i < items.length; i++) {
-                    ArrTest[i] = parseInt(items[i]._element.alt)
-
-                }
-                Array_sum = SumData(ArrTest)
-                $(".count").val(Array_sum)
-            }, 500)
-            // var index = changeArray.indexOf(objjj);
-            // if (index > -1) {
-            // } else {
-            //     changeArray.push(objjj)
-            // }
-            var ji = canvas.getActiveObject()
-            if (ji) {
-                var index = changeArray.indexOf(ji);
-                if (index > -1) {
-                    console.log(index)
-
-                    changeArray.splice(index, 1);
-                    var stage = new Array()
-                    for (i = 0; i < changeArray.length; i++) {
-                        stage.push(parseInt(changeArray[i]._element.alt))
-                    }
-
-                    change_Array_sum = SumData(stage)
-
-                }
-                canvas.remove(ji)
-            }
-
-            function getSelection() {
-
-                return canvas.getActiveObject() == null ? canvas.getActiveGroup() : canvas.getActiveObject()
-            }
-
-
-            var o = getSelection();
-            o._objects.forEach(function (object, key) {
-                var index = changeArray.indexOf(object);
-                if (index > -1) {
-                    console.log(index)
-
-                    changeArray.splice(index, 1);
-                    var stage = new Array()
-                    for (i = 0; i < changeArray.length; i++) {
-                        stage.push(parseInt(changeArray[i]._element.alt))
-                    }
-
-                    change_Array_sum = SumData(stage)
-
-                }
-                canvas.remove(object);
-            });
-
-            canvas.discardActiveObject()
-
-
-
-
-
-            canvas.renderAll();
-
-
-
-
-
-        },
-        cursor: 'pointer'
+        }
     },
     bl: {
         action: function () {
 
         }
+
     },
     br: {
         action: function () {
@@ -410,20 +399,6 @@ fabric.Canvas.prototype.customiseControls({
 
     canvas.renderAll()
 })
-
-
-fabric.Object.prototype.setControlsVisibility({
-    bl: true, // 左下
-    br: true, // 右下
-    mb: false, // 下中
-    ml: false, // 中左
-    mr: false, // 中右
-    mt: false, // 上中
-    tl: false, // 上左
-    tr: true, // 上右
-    mtr: false // 旋轉控制鍵
-})
-
 fabric.Canvas.prototype.cursorMap[1] = 'pointer'
 // fabric.Canvas.prototype.cursorMap[2] = 'pointer'
 fabric.Canvas.prototype.cursorMap[3] = 'pointer'
@@ -434,14 +409,218 @@ fabric.Canvas.prototype.cursorMap[5] = 'pointer'
 // fabric.Canvas.prototype.cursorMap[8] = 'pointer'
 // fabric.Canvas.prototype.cursorMap[9] = 'pointer'
 // fabric.Canvas.prototype.cursorMap[1] = 'pointer'
+fabric.Canvas.prototype.customiseControls({
+    tl: {
+        action: function () {
+
+        }
+    },
+    tr: {
+        action: function (e) {
+
+
+            var ji = canvas.getActiveObject()
+            console.log(ji)
+            console.log(objseleted)
+            if (ji.cacheKey == objseleted) {
+                if (ji) {
+                    var index = changeArray.indexOf(ji);
+                    if (index > -1) {
+                        console.log(index)
+
+                        changeArray.splice(index, 1);
+                        var stage = new Array()
+                        for (i = 0; i < changeArray.length; i++) {
+                            stage.push(parseInt(changeArray[i]._element.alt))
+                        }
+
+                        change_Array_sum = SumData(stage)
+
+                    }
+                    canvas.remove(ji)
+                }
+            }
+            if (ji._objects) {
+                function getSelection() {
+
+                    return canvas.getActiveObject() == null ? canvas.getActiveGroup() : canvas.getActiveObject()
+                }
+
+                var o = getSelection();
+
+                o._objects.forEach(function (object, key) {
+                    var index = changeArray.indexOf(object);
+                    if (index > -1) {
+                        console.log(index)
+
+                        changeArray.splice(index, 1);
+                        var stage = new Array()
+                        for (i = 0; i < changeArray.length; i++) {
+                            stage.push(parseInt(changeArray[i]._element.alt))
+                        }
+
+                        change_Array_sum = SumData(stage)
+
+                    }
+                    canvas.remove(object);
+                });
+                canvas.discardActiveObject()
+
+            }
+
+
+
+            canvas.renderAll();
+            setTimeout(function ww() {
+                var items = canvas.getObjects()
+                var Array_sum
+                var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+                for (i = 0; i < items.length; i++) {
+                    ArrTest[i] = parseInt(items[i]._element.alt)
+
+                }
+                Array_sum = SumData(ArrTest)
+                $(".count").val(Array_sum)
+            }, 500)
+
+
+        },
+        cursor: 'pointer'
+    },
+    bl: {
+        action: "rotate",
+
+    },
+    br: {
+        action: "scale",
+
+        cursor: 'pointer'
+    },
+    mb: {
+        action: function () {
+
+        }
+    },
+    mt: {
+        action: function () {
+
+        }
+    },
+    ml: {
+        action: function () {
+
+        }
+    },
+    mr: {
+        action: function () {
+
+        }
+    },
+    mtr: {
+        action: function () {
+
+        }
+    },
+}, function () {
+
+    canvas.renderAll()
+})
+
+
+var objseleted
+
+canvas.on('selection:updated', function (e) {
+    setTimeout(function () {
+        objseleted = e.target.cacheKey
+        console.log(objseleted)
+    }, 120)
+
+});
+
+
+
+
+
+
+
 
 canvas.on('object:selected', e => {
     if (e.target) {
+        console.log(e)
         e.target.bringToFront()
-
+        setTimeout(function () {
+            objseleted = e.target.cacheKey
+            console.log(objseleted)
+        }, 120)
     }
+
+
     // canvas.moveTo(e.target, 0);
 })
+
+
+
+
+
+
+var left1 = 0;
+var top1 = 0;
+var scale1x = 0;
+var scale1y = 0;
+var width1 = 0;
+var height1 = 0;
+var angle = 0
+
+canvas.on('object:scaling', function (e) {
+    var obj = e.target;
+    // obj.set('strokeWidth', 50)
+
+    obj.setCoords();
+    var brNew = obj.getBoundingRect();
+
+    if (((brNew.width + brNew.left) >= obj.canvas.width - (20 * sRSS)) || ((brNew.height + brNew.top) >= obj.canvas.height - (20 * sRSS)) || ((brNew.left < (20 * sRSS)) || (brNew.top < (20 * sRSS)))) {
+        obj.left = left1;
+        obj.top = top1;
+        obj.scaleX = scale1x;
+        obj.scaleY = scale1y;
+        obj.width = width1;
+        obj.height = height1;
+    }
+    else {
+        left1 = obj.left;
+        top1 = obj.top;
+        scale1x = obj.scaleX;
+        scale1y = obj.scaleY;
+        width1 = obj.width;
+        height1 = obj.height;
+    }
+});
+canvas.on('object:rotating', function (e) {
+    var obj = e.target;
+    obj.setCoords();
+    var brNew = obj.getBoundingRect();
+
+    if (((brNew.width + brNew.left) >= obj.canvas.width - (20 * sRSS)) || ((brNew.height + brNew.top) >= obj.canvas.height - (20 * sRSS)) || ((brNew.left < (20 * sRSS)) || (brNew.top < (20 * sRSS)))) {
+        obj.left = left1;
+        obj.top = top1;
+        obj.scaleX = scale1x;
+        obj.scaleY = scale1y;
+        obj.width = width1;
+        obj.height = height1;
+        obj.angle = angle1;
+    }
+    else {
+        left1 = obj.left;
+        top1 = obj.top;
+        scale1x = obj.scaleX;
+        scale1y = obj.scaleY;
+        width1 = obj.width;
+        height1 = obj.height;
+        angle1 = obj.angle;
+
+    }
+});
 
 canvas.on('object:moving', function (e) {
     var obj = e.target;
@@ -452,17 +631,17 @@ canvas.on('object:moving', function (e) {
     obj.setCoords();
     // top-left  corner
     if (obj.getBoundingRect().top || obj.getBoundingRect().left) {
-        obj.top = Math.max(obj.top, obj.top + (20 * sRSS) - obj.getBoundingRect().top);
-        obj.left = Math.max(obj.left, obj.left - obj.getBoundingRect().left);
+        obj.top = Math.max(obj.top, obj.top + (30 * sRSS) - obj.getBoundingRect().top);
+        obj.left = Math.max(obj.left, obj.left + (30 * sRSS) - obj.getBoundingRect().left);
     }
     // bot-right corner
-    if (obj.getBoundingRect().top + obj.getBoundingRect().height > obj.canvas.height || obj.getBoundingRect().left + obj.getBoundingRect().width > obj.canvas.width) {
+    if (obj.getBoundingRect().left + obj.getBoundingRect().width > obj.canvas.width) {
         obj.top = Math.min(obj.top, obj.canvas.height - obj.getBoundingRect().height + obj.top - obj.getBoundingRect().top);
-        obj.left = Math.min(obj.left, obj.canvas.width - (20 * sRSS) - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
+        obj.left = Math.min(obj.left, obj.canvas.width - (30 * sRSS) - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
     }
 
     if (obj.getBoundingRect().left + obj.getBoundingRect().width > obj.canvas.width * 0.78 && obj.getBoundingRect().top + obj.getBoundingRect().height > obj.canvas.height * 0.65) {
-        obj.left = Math.min(obj.left, obj.canvas.width * 0.78 - (20 * sRSS) - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
+        obj.left = Math.min(obj.left, obj.canvas.width * 0.78 - (30 * sRSS) - obj.getBoundingRect().width + obj.left - obj.getBoundingRect().left);
 
     }
 
@@ -528,64 +707,7 @@ canvas.on('object:moving', function (e) {
 
 
 
-    if (e.e.clientY > $('.canvas-container').height() + $('.canvas-container').offset().top + 30 * sRSS) {
 
-        var obj = e.target;
-        var obkkk = obj._objects ? obj._objects : e.target
-        obj.setCoords();
-
-        // if ((obj.getBoundingRect().left + obj.getBoundingRect().width/2) > obj.canvas.width * 0.80 && obj.getBoundingRect().top + obj.getBoundingRect().height < obj.canvas.height * 0.65) {
-
-        if (obkkk == e.target) {
-            var index = changeArray.indexOf(obkkk);
-            if (index > -1) {
-                changeArray.splice(index, 1);
-            }
-            canvas.remove(obkkk)
-        }
-
-        if (obkkk == obj._objects) {
-            
-            obkkk.forEach(function (object, key) {
-                var index = changeArray.indexOf(object);
-                if (index > -1) {
-                    changeArray.splice(index, 1);
-                }
-                canvas.remove(object);
-            });
-            canvas.discardActiveObject()
-
-        }
-
-        // function getSelection() {
-
-        //     return canvas.getActiveObject() == null ? canvas.getActiveGroup() : canvas.getActiveObject()
-        // }
-
-        // var ko = new Array()
-        // var o = getSelection();
-
-        // o._objects.forEach(function (object, key) {
-        //     canvas.remove(object);
-        // });
-        // canvas.discardActiveObject()
-
-
-        canvas.renderAll();
-
-        setTimeout(function ww() {
-            var items = canvas.getObjects()
-            var Array_sum
-            var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
-
-            for (i = 0; i < items.length; i++) {
-                ArrTest[i] = parseInt(items[i]._element.alt)
-
-            }
-            Array_sum = SumData(ArrTest)
-            $(".count").val(Array_sum)
-        }, 500)
-    }
 
     for (i = 0; i < changeArray.length; i++) {
         stage.push(parseInt(changeArray[i]._element.alt))
@@ -605,108 +727,49 @@ var change_Array_sum = 0
 
 
 canvas.on('object:moved', function (e) {
-    // var obj = e.target;
-    // var objjj = obj._objects ? obj._objects : e.target
-    // obj.setCoords();
-    // console.log(e)
-    // // if ((obj.getBoundingRect().left + obj.getBoundingRect().width/2) > obj.canvas.width * 0.80 && obj.getBoundingRect().top + obj.getBoundingRect().height < obj.canvas.height * 0.65) {
+    var obj = e.target;
 
-    // if (objjj == e.target) {
-    //     if (obj.getBoundingRect().left > obj.canvas.width * 0.80 && obj.getBoundingRect().top + obj.getBoundingRect().height < obj.canvas.height * 0.65) {
-    //         var index = changeArray.indexOf(objjj);
-    //         if (index > -1) {
-    //         } else {
-    //             changeArray.push(objjj)
-    //         }
-    //     } else {
-    //         var index = changeArray.indexOf(objjj);
-    //         if (index > -1) {
-    //             changeArray.splice(index, 1);
-    //         }
+    if (obj.getBoundingRect().top + obj.getBoundingRect().height > $('.canvas-container').height() + $('.canvas-container').offset().top) {
 
-    //     }
-    // }
-
-    // if (objjj == obj._objects) {
-    //     for (i = 0; i < objjj.length; i++) {
-    //         if ((obj.left + (obj.width / 2) + objjj[i].left) > obj.canvas.width * 0.80) {
-    //             var index = changeArray.indexOf(objjj[i]);
-    //             if (index > -1) {
-    //             } else {
-    //                 changeArray.push(objjj[i])
-    //             }
-    //         } else {
-    //             var index = changeArray.indexOf(objjj[i]);
-    //             if (index > -1) {
-    //                 changeArray.splice(index, 1);
-    //             }
-    //         }
-    //     }
-    // }
-    // var stage = new Array()
-    // for (i = 0; i < changeArray.length; i++) {
-    //     stage.push(parseInt(changeArray[i]._element.alt))
-    // }
+        var obj = e.target;
+        var obkkk = obj._objects ? obj._objects : e.target
+        obj.setCoords();
 
 
+        if (obkkk == e.target) {
+            canvas.remove(obkkk)
+        }
+
+        if (obkkk == obj._objects) {
+            obkkk.forEach(function (object, key) {
+                canvas.remove(object);
+            });
+            canvas.discardActiveObject()
+
+        }
 
 
-    // change_Array_sum = SumData(stage)
+        canvas.renderAll();
 
+        setTimeout(function ww() {
+            var items = canvas.getObjects()
+            var Array_sum
+            var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
 
+            for (i = 0; i < items.length; i++) {
+                ArrTest[i] = parseInt(items[i]._element.alt)
 
+            }
+            Array_sum = SumData(ArrTest)
+            $(".count").val(Array_sum)
 
-    // if (e.e.clientY > $('.canvas-container').height() + $('.canvas-container').offset().top + 30 * sRSS) {
-
-    //     var obj = e.target;
-    //     var obkkk = obj._objects ? obj._objects : e.target
-    //     obj.setCoords();
-
-    //     // if ((obj.getBoundingRect().left + obj.getBoundingRect().width/2) > obj.canvas.width * 0.80 && obj.getBoundingRect().top + obj.getBoundingRect().height < obj.canvas.height * 0.65) {
-
-    //     if (obkkk == e.target) {
-    //         canvas.remove(obkkk)
-    //     }
-
-    //     if (obkkk == obj._objects) {
-    //         obkkk.forEach(function (object, key) {
-    //             canvas.remove(object);
-    //         });
-    //         canvas.discardActiveObject()
-
-    //     }
-
-    //     // function getSelection() {
-
-    //     //     return canvas.getActiveObject() == null ? canvas.getActiveGroup() : canvas.getActiveObject()
-    //     // }
-
-    //     // var ko = new Array()
-    //     // var o = getSelection();
-
-    //     // o._objects.forEach(function (object, key) {
-    //     //     canvas.remove(object);
-    //     // });
-    //     // canvas.discardActiveObject()
-
-
-    //     canvas.renderAll();
-
-    //     setTimeout(function ww() {
-    //         var items = canvas.getObjects()
-    //         var Array_sum
-    //         var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
-
-    //         for (i = 0; i < items.length; i++) {
-    //             ArrTest[i] = parseInt(items[i]._element.alt)
-
-    //         }
-    //         Array_sum = SumData(ArrTest)
-    //         $(".count").val(Array_sum)
-    //     }, 500)
-    // }
-
+        }, 500)
+    }
 })
+
+
+
+
 var count22 = -1
 var littlemove = 0
 var start = 1
@@ -753,7 +816,7 @@ $('.change_btn').click(function () {
                 var s_1_1 = 0
                 // var w = 0 
                 const imgEl_1 = document.createElement('img')
-                imgEl_1.src = "img/cc1.svg"
+                imgEl_1.src = "img/newc1.svg"
                 imgEl_1.alt = '1'
 
                 imgEl_1.onload = (e) => {
@@ -787,7 +850,7 @@ $('.change_btn').click(function () {
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
                         s_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -802,7 +865,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * numnum, {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
                                 duration: 600 + s_1 * 5,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -818,7 +881,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 5 && arr_one.length <= 10) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -833,7 +896,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 5), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -851,7 +914,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 10 && arr_one.length <= 15) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -866,7 +929,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 10), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 10), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -883,7 +946,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 15 && arr_one.length <= 20) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -898,7 +961,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 15), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 15), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -916,7 +979,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 20 && arr_one.length <= 25) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -931,7 +994,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 20), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 20), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -951,7 +1014,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 25 && arr_one.length <= 30) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -966,7 +1029,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 25), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 25), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -986,7 +1049,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 30 && arr_one.length <= 35) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1001,7 +1064,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 30), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 30), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1020,7 +1083,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 35 && arr_one.length <= 40) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1035,7 +1098,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 35), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 35), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1053,7 +1116,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 40 && arr_one.length <= 45) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1068,7 +1131,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 40), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 40), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1086,7 +1149,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 45 && arr_one.length <= 50) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1101,7 +1164,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 45), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 45), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1181,7 +1244,7 @@ $('.change_btn').click(function () {
                 var s_1_1 = 0
                 // var w = 0 
                 const imgEl_1 = document.createElement('img')
-                imgEl_1.src = "img/cc10.svg"
+                imgEl_1.src = "img/newc10.svg"
                 imgEl_1.alt = '10'
 
                 imgEl_1.onload = (e) => {
@@ -1215,7 +1278,7 @@ $('.change_btn').click(function () {
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
                         s_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1230,7 +1293,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * numnum, {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
                                 duration: 600 + s_1 * 5,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1246,7 +1309,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 5 && arr_one.length <= 10) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1261,7 +1324,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 5), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1279,7 +1342,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 10 && arr_one.length <= 15) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1294,7 +1357,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 10), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 10), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1311,7 +1374,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 15 && arr_one.length <= 20) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1325,7 +1388,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 15), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 15), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1343,7 +1406,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 20 && arr_one.length <= 25) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1358,7 +1421,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 20), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 20), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1378,7 +1441,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 25 && arr_one.length <= 30) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1393,7 +1456,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 25), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 25), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1413,7 +1476,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 30 && arr_one.length <= 35) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1428,7 +1491,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 30), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 30), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1447,7 +1510,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 35 && arr_one.length <= 40) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1462,7 +1525,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 35), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 35), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1480,7 +1543,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 40 && arr_one.length <= 45) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1495,7 +1558,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 40), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 40), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1513,7 +1576,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 45 && arr_one.length <= 50) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1528,7 +1591,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 45), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 45), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1620,7 +1683,7 @@ $('.change_btn').click(function () {
                 var s_1_1 = 0
                 // var w = 0 
                 const imgEl_1 = document.createElement('img')
-                imgEl_1.src = "img/cc100.svg"
+                imgEl_1.src = "img/newc100.svg"
                 imgEl_1.alt = '100'
 
                 imgEl_1.onload = (e) => {
@@ -1654,7 +1717,7 @@ $('.change_btn').click(function () {
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
                         s_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1669,7 +1732,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * numnum, {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
                                 duration: 600 + s_1 * 5,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1685,7 +1748,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 5 && arr_one.length <= 10) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1700,7 +1763,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 5), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1718,7 +1781,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 10 && arr_one.length <= 15) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1733,7 +1796,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 10), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 10), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1750,7 +1813,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 15 && arr_one.length <= 20) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1765,7 +1828,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 15), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 15), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1783,7 +1846,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 20 && arr_one.length <= 25) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1798,7 +1861,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 20), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 20), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1818,7 +1881,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 25 && arr_one.length <= 30) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1833,7 +1896,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 25), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 25), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1853,7 +1916,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 30 && arr_one.length <= 35) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1868,7 +1931,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 30), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 30), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1887,7 +1950,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 35 && arr_one.length <= 40) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1902,7 +1965,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 35), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 35), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1920,7 +1983,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 40 && arr_one.length <= 45) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1935,7 +1998,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 40), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 40), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1953,7 +2016,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 45 && arr_one.length <= 50) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -1968,7 +2031,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 45), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 45), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2060,7 +2123,7 @@ $('.change_btn').click(function () {
                 var s_1_1 = 0
                 // var w = 0 
                 const imgEl_1 = document.createElement('img')
-                imgEl_1.src = "img/cc1000.svg"
+                imgEl_1.src = "img/newc1000.svg"
                 imgEl_1.alt = '1000'
 
                 imgEl_1.onload = (e) => {
@@ -2094,7 +2157,7 @@ $('.change_btn').click(function () {
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
                         s_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2109,7 +2172,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * numnum, {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
                                 duration: 600 + s_1 * 5,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2125,7 +2188,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 5 && arr_one.length <= 10) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2140,7 +2203,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 5), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2158,7 +2221,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 10 && arr_one.length <= 15) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2173,7 +2236,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 10), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 10), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2190,7 +2253,7 @@ $('.change_btn').click(function () {
 
                     } else if (arr_one.length > 15 && arr_one.length <= 20) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2205,7 +2268,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 15), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 15), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2223,7 +2286,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 20 && arr_one.length <= 25) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2238,7 +2301,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 20), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 20), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2258,7 +2321,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 25 && arr_one.length <= 30) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2273,7 +2336,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 25), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 25), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2293,7 +2356,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 30 && arr_one.length <= 35) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2308,7 +2371,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 30), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 30), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2327,7 +2390,7 @@ $('.change_btn').click(function () {
 
                     else if (arr_one.length > 35 && arr_one.length <= 40) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2342,7 +2405,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 35), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 35), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2360,7 +2423,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 40 && arr_one.length <= 45) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2375,7 +2438,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 40), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 40), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -2393,7 +2456,7 @@ $('.change_btn').click(function () {
                     }
                     else if (arr_one.length > 45 && arr_one.length <= 50) {
                         s_1_1 += 10
-                        image.animate('top', 30 * sRSS + 120 * sRSS, {
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
                             duration: 300 + s_1,
                             onChange: canvas.renderAll.bind(canvas),
 
@@ -2408,7 +2471,7 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 30 * sRSS + 120 * sRSS * (numnum - 45), {
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 45), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 

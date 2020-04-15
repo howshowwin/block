@@ -35,8 +35,9 @@ function convertSizeALL(className) {
     $('.change_btn').css({ width: Math.round(352 * sRatio), height: Math.round(65 * sRatio) });
     $('.close_btn').css({ width: Math.round(76 * sRatio), height: Math.round(77 * sRatio) });
     $('.useteach').css({ width: Math.round(263 * sRatio), height: Math.round(78 * sRatio) });
-    $('.countpic').css({ width: Math.round(285 * sRatio), height: Math.round(154 * sRatio) });
-    $('.delete_btn').css({ width: Math.round(65 * sRatio), height: Math.round(64 * sRatio) });
+    $('.countpic').css({ width: Math.round(262 * sRatio), height: Math.round(163 * sRatio) });
+    $('.delete_btn').css({ width: Math.round(67 * sRatio), height: Math.round(52 * sRatio) });
+    $('.openorclosecount_btn').css({ width: Math.round(175 * sRatio), height: Math.round(52 * sRatio) });
     $('.inputarea').css({ width: Math.round(159 * sRatio), height: Math.round(79 * sRatio) });
     $('.arrow').css({ width: Math.round(19 * sRatio), height: Math.round(13 * sRatio) });
     $('.choosenum').css({ width: Math.round(149 * sRatio), height: Math.round(565 * sRatio) });
@@ -101,10 +102,23 @@ function convertSizeALL(className) {
               cornerPadding: 0
           },
   
+       
           tr: {
-  
-              icon: 'img/tX.png',
-          },
+
+            icon: 'img/tX.svg',
+        },
+        bl: {
+            icon: 'img/tR.svg',
+
+        },
+        br: {
+            settings: {
+                borderColor: '#0094dd',
+
+                cornerShape: 'circle',
+            },
+            icon: 'img/tB.svg'
+        },
       
       }, function () {
           canvas.renderAll()
