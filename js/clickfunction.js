@@ -817,11 +817,12 @@ $('.change_btn').click(function () {
 
             for (i = 0; i < change_Array_sum; i++) {
                 var s_1_1 = 0
+                var s_1 = 0
                 // var w = 0 
                 const imgEl_1 = document.createElement('img')
                 imgEl_1.src = "img/newc1.svg"
                 imgEl_1.alt = '1'
-
+                // s_1 +=  20
                 imgEl_1.onload = (e) => {
 
                     const image = new fabric.Image(imgEl_1, {
@@ -831,8 +832,9 @@ $('.change_btn').click(function () {
                         scaleY: parseInt($('.img_one').height()) / e.target.naturalHeight,
 
                         top: 20 * sRSS,
-                        left: (1500 + Math.random() * 250) * sRSS
+                        left: (1500 ) * sRSS
                     })
+                    image.left = 20+s_1 
                     canvas.add(image)
 
                     image.alt = 1
@@ -847,7 +849,10 @@ $('.change_btn').click(function () {
 
                     image._element.alt = '1'
                     arr_one.push(image)
-
+                    console.log(arr_one)
+                    for(i=0;i<arr_one.length;i++){
+                        arr_one[i].left = (1500+i*5)* sRSS
+                    }
                     var maxWidthRed = 265 * sRSS
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
@@ -1275,7 +1280,9 @@ $('.change_btn').click(function () {
 
                     image._element.alt = '10'
                     arr_one.push(image)
-
+                    for(i=0;i<arr_one.length;i++){
+                        arr_one[i].left = (1500+i*5)* sRSS
+                    }
                     var maxWidthRed = 265 * sRSS
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
@@ -1714,7 +1721,9 @@ $('.change_btn').click(function () {
 
                     image._element.alt = '100'
                     arr_one.push(image)
-
+                    for(i=0;i<arr_one.length;i++){
+                        arr_one[i].left = (1500+i*3)* sRSS
+                    }
                     var maxWidthRed = 265 * sRSS
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
@@ -2154,7 +2163,9 @@ $('.change_btn').click(function () {
 
                     image._element.alt = '1000'
                     arr_one.push(image)
-
+                    for(i=0;i<arr_one.length;i++){
+                        arr_one[i].left = (1500+i*4)* sRSS
+                    }
                     var maxWidthRed = 265 * sRSS
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
