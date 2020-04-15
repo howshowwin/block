@@ -813,8 +813,9 @@ $('.change_btn').click(function () {
             }
 
             var arr_one = new Array()
+            var s_1 = 0
+
             for (i = 0; i < change_Array_sum; i++) {
-                var s_1 = 0
                 var s_1_1 = 0
                 // var w = 0 
                 const imgEl_1 = document.createElement('img')
@@ -822,7 +823,6 @@ $('.change_btn').click(function () {
                 imgEl_1.alt = '1'
 
                 imgEl_1.onload = (e) => {
-
 
                     const image = new fabric.Image(imgEl_1, {
                         width: e.target.naturalWidth,

@@ -293,7 +293,6 @@ toucharea.addEventListener("touchend", function(e) {
     var direction = getDirection(startx, starty, endx, endy);
     switch (direction) {
         case 0:
-            alert("未滑動！");
             break;
         case 1:
      
