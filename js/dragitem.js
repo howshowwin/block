@@ -296,21 +296,21 @@ toucharea.addEventListener("touchend", function(e) {
             alert("未滑動！");
             break;
         case 1:
-            var bgP = $('.img_box').css('backgroundSize')
-            var jj = bgP.slice(5, 15)
-            stagenum = parseInt(jj) / 4 + stagenum
-        
-            $('.img_box').css({
-                backgroundPosition: `0 ${Math.round(30 * sRSS) + stagenum}px`
-            })
-        
-            break;
-        case 2:
+     
             var bgP = $('.img_box').css('backgroundSize')
             var jj = bgP.slice(5, 15)
             stagenum = stagenum - parseInt(jj) / 4
         
             // //當滑輪向上滾動時 
+            $('.img_box').css({
+                backgroundPosition: `0 ${Math.round(30 * sRSS) + stagenum}px`
+            })
+            break;
+        case 2:
+            var bgP = $('.img_box').css('backgroundSize')
+            var jj = bgP.slice(5, 15)
+            stagenum = parseInt(jj) / 4 + stagenum
+        
             $('.img_box').css({
                 backgroundPosition: `0 ${Math.round(30 * sRSS) + stagenum}px`
             })
