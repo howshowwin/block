@@ -216,14 +216,14 @@ $('.openorclosecount_btn').click(function () {
     if (togglecount == 0) {
         $('.count').removeClass('display_none')
         $(this).css({
-            background: "url(img/newbox3-1.svg)",
+            background: "url(img/newbox3-2.svg)",
             backgroundSize: "cover"
         })
         togglecount = 1
     } else {
         $('.count').addClass('display_none')
         $(this).css({
-            background: "url(img/newbox3-2.svg)",
+            background: "url(img/newbox3-1.svg)",
             backgroundSize: "cover"
         })
         togglecount = 0
