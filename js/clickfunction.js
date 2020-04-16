@@ -229,6 +229,28 @@ $('.openorclosecount_btn').click(function () {
         togglecount = 0
     }
 })
+
+
+
+$('body').keydown(function (event) {
+    if (event.which == 13 && $('.count').is(":focus")) {
+        canvas.clear();
+
+        idontknowwhatiwrite()
+        $('.enter_thd').val('')
+        $('.enter_hrd').val('')
+        $('.enter_ten').val('')
+        $('.enter_one').val('')
+    }
+    if (event.which == 13 && !$('.count').is(":focus")) {
+        appendblock()
+
+    }
+})
+
+
+
+
 $('.numlist').click(function () {
     let showClick = $(this).data("numval")
     let amount = $(this).closest(".choosenum").data("amount")
@@ -237,9 +259,15 @@ $('.numlist').click(function () {
     appendblock()
 })
 
-$('.enter_input').blur(function () {
-    appendblock()
+var u = navigator.userAgent;
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
+$('.enter_input').blur(function () {
+    
+    if (isAndroid) {
+        appendblock()
+    }
 })
 function SumData(arr) {
     var sum = 0;
@@ -311,8 +339,8 @@ $('.delete_btn').click(function () {
     $('.count').val(0)
     redcount = -1
     bluecount = 0
-    yellowcount = 1
-    greencount = 2
+    yellowcount = 3
+    greencount = 4
     redlittlemove = 0
     bluelittlemove = 0
     yellowlittlemove = 0
@@ -560,7 +588,7 @@ canvas.on('object:selected', e => {
 })
 
 
-canvas.on('selection:cleared',e =>{
+canvas.on('selection:cleared', e => {
     objseleted = 0
 })
 
@@ -832,9 +860,9 @@ $('.change_btn').click(function () {
                         scaleY: parseInt($('.img_one').height()) / e.target.naturalHeight,
 
                         top: 20 * sRSS,
-                        left: (1500 ) * sRSS
+                        left: (1500) * sRSS
                     })
-                    image.left = 20+s_1 
+                    image.left = 20 + s_1
                     canvas.add(image)
 
                     image.alt = 1
@@ -850,10 +878,12 @@ $('.change_btn').click(function () {
                     image._element.alt = '1'
                     arr_one.push(image)
                     console.log(arr_one)
-                    for(i=0;i<arr_one.length;i++){
-                        arr_one[i].left = (1500+i*5)* sRSS
+                    const om = 300 
+                    var nowchange1 = om / arr_one.length
+                    for (i = 0; i < arr_one.length; i++) {
+                        arr_one[i].left = (1500 + i*nowchange1 ) * sRSS
                     }
-                    var maxWidthRed = 265 * sRSS
+                    var maxWidthRed2 = 265 * sRSS
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
                         s_1 += 10
@@ -872,13 +902,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * numnum, {
                                 duration: 600 + s_1 * 5,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (45 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (45 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 600 + s_1 * 5,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -903,13 +933,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 5), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (165 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (125 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -936,13 +966,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 10), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 10), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (285 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (205 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -968,13 +998,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 15), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 15), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (405 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (285 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1001,13 +1031,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 20), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 20), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (525 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (365 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1036,13 +1066,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 25), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 25), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (645 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (445 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1071,13 +1101,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 30), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 30), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (765 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (525 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1105,13 +1135,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 35), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 35), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (885 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (605 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1138,13 +1168,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 40), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 40), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (1005 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (685 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1171,13 +1201,13 @@ $('.change_btn').click(function () {
 
                         function gototheway() {
                             numnum++
-                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 45), {
+                            image.animate('top', 40 * sRSS + 80 * sRSS * (numnum - 45), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (1125 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (765 * sRSS) + (maxWidthRed2 * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1280,9 +1310,12 @@ $('.change_btn').click(function () {
 
                     image._element.alt = '10'
                     arr_one.push(image)
-                    for(i=0;i<arr_one.length;i++){
-                        arr_one[i].left = (1500+i*5)* sRSS
+                    const om = 300 
+                    var nowchange2 = om / arr_one.length
+                    for (i = 0; i < arr_one.length; i++) {
+                        arr_one[i].left = (1500 + i*nowchange2 ) * sRSS
                     }
+               
                     var maxWidthRed = 265 * sRSS
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
@@ -1339,7 +1372,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (165 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (125 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1372,7 +1405,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (285 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (205 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1403,7 +1436,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (405 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (285 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1436,7 +1469,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (525 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (365 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1471,7 +1504,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (645 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (445 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1506,7 +1539,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (765 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (525 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1540,7 +1573,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (885 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (605 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1573,7 +1606,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (1005 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (685 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1606,7 +1639,7 @@ $('.change_btn').click(function () {
 
                                 easing: fabric.util.ease.easeInOutExpo
                             })
-                            image.animate('left', (1125 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                            image.animate('left', (765 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
                                 duration: 800 + s_1,
                                 onChange: canvas.renderAll.bind(canvas),
 
@@ -1721,9 +1754,12 @@ $('.change_btn').click(function () {
 
                     image._element.alt = '100'
                     arr_one.push(image)
-                    for(i=0;i<arr_one.length;i++){
-                        arr_one[i].left = (1500+i*3)* sRSS
+                    const oom = 180 
+                    var nowchange3 = oom / arr_one.length
+                    for (i = 0; i < arr_one.length; i++) {
+                        arr_one[i].left = (1500 + i*nowchange3) * sRSS
                     }
+               
                     var maxWidthRed = 265 * sRSS
                     // for (i = 0; i < arr_one.length; i++) {
                     if (arr_one.length <= 5) {
@@ -2163,8 +2199,10 @@ $('.change_btn').click(function () {
 
                     image._element.alt = '1000'
                     arr_one.push(image)
-                    for(i=0;i<arr_one.length;i++){
-                        arr_one[i].left = (1500+i*4)* sRSS
+                    const oom = 180 
+                    var nowchange4 = oom / arr_one.length
+                    for (i = 0; i < arr_one.length; i++) {
+                        arr_one[i].left = (1500 + i*nowchange4) * sRSS
                     }
                     var maxWidthRed = 265 * sRSS
                     // for (i = 0; i < arr_one.length; i++) {
