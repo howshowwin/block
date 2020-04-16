@@ -312,7 +312,7 @@ imgEl_1.onload = (e) => {
 
             easing: fabric.util.ease.easeInOutExpo
         })
-        image.animate('left', (Math.round(120 * sRSS))+(Math.round(20 * sRSS)) + (maxWidthyellow * yellowcount) + (Math.round(yellowlittlemove * sRSS)), {
+        image.animate('left', (Math.round(130 * sRSS))+(Math.round(20 * sRSS)) + (maxWidthyellow * yellowcount) + (Math.round(yellowlittlemove * sRSS)), {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
@@ -328,7 +328,7 @@ imgEl_1.onload = (e) => {
 
             easing: fabric.util.ease.easeInOutExpo
         })
-        image.animate('left', (Math.round(230 * sRSS))+(Math.round(20 * sRSS)) + (maxWidthyellow * yellowcount) + (Math.round(yellowlittlemove * sRSS)), {
+        image.animate('left', (Math.round(210 * sRSS))+(Math.round(20 * sRSS)) + (maxWidthyellow * yellowcount) + (Math.round(yellowlittlemove * sRSS)), {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
@@ -400,13 +400,13 @@ imgEl_1.onload = (e) => {
         s_1 += 10
 
 
-        image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * numnum3, {
+        image.animate('top', Math.round(40 * sRSS) + Math.round(80 * sRSS) * numnum3, {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
             easing: fabric.util.ease.easeInOutExpo
         })
-        image.animate('left', (Math.round(65 * sRSS)) +(Math.round(30 * sRSS))+ (maxWidthgreen * greencount) + (Math.round(greenlittlemove * sRSS)), {
+        image.animate('left', (Math.round(85 * sRSS)) +(Math.round(30 * sRSS))+ (maxWidthgreen * greencount) + (Math.round(greenlittlemove * sRSS)), {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
@@ -416,13 +416,13 @@ imgEl_1.onload = (e) => {
         s_1_1 += 10
 
 
-        image.animate('top', Math.round(40 * sRSS) + Math.round(120 * sRSS) * (numnum3 - 5), {
+        image.animate('top', Math.round(40 * sRSS) + Math.round(80 * sRSS) * (numnum3 - 5), {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
             easing: fabric.util.ease.easeInOutExpo
         })
-        image.animate('left', (Math.round(185 * sRSS))+(Math.round(30 * sRSS)) + (maxWidthgreen * greencount) + (Math.round(greenlittlemove * sRSS)), {
+        image.animate('left', (Math.round(165 * sRSS))+(Math.round(30 * sRSS)) + (maxWidthgreen * greencount) + (Math.round(greenlittlemove * sRSS)), {
             duration: 800 + s_1,
             onChange: canvas.renderAll.bind(canvas),
 
