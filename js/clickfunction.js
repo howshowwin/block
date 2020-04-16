@@ -230,22 +230,25 @@ $('.openorclosecount_btn').click(function () {
     }
 })
 
-
+var keydownblur =0
 
 $('body').keydown(function (event) {
     if (event.which == 13 && $('.count').is(":focus")) {
         canvas.clear();
-
+        keydownblur = 1
         idontknowwhatiwrite()
         $('.enter_thd').val('')
         $('.enter_hrd').val('')
         $('.enter_ten').val('')
         $('.enter_one').val('')
+        $('.count').blur()
+
     }
     if (event.which == 13 && !$('.count').is(":focus")) {
         appendblock()
 
     }
+
 })
 
 
@@ -282,10 +285,16 @@ $(".count").bind('input porpertychange', function () {
         $('.count').val(10999)
     }
 })
+var blurnow = 0
 $('.count').focus(function () {
     $('.count').val("")
+    blurnow = 1
 })
-$('.count').blur(function () {
+$('.count').blur(function (e) {
+    setTimeout(function(){
+        blurnow = 0
+    },200)
+    console.log(e)
     if ($('.count').val() == "") {
         setTimeout(function ww() {
             var items = canvas.getObjects()
@@ -300,13 +309,19 @@ $('.count').blur(function () {
             $(".count").val(Array_sum)
         }, 500)
     } else {
-        canvas.clear();
+        if(keydownblur==0){
+            canvas.clear();
 
-        idontknowwhatiwrite()
-        $('.enter_thd').val('')
-        $('.enter_hrd').val('')
-        $('.enter_ten').val('')
-        $('.enter_one').val('')
+            idontknowwhatiwrite()
+            $('.enter_thd').val('')
+            $('.enter_hrd').val('')
+            $('.enter_ten').val('')
+            $('.enter_one').val('')
+
+        }else{
+            keydownblur =0
+        }
+       
     }
 })
 
@@ -335,23 +350,29 @@ $('.useteach').click(function () {
 
 })
 $('.delete_btn').click(function () {
-    canvas.clear()
-    $('.count').val(0)
-    redcount = -1
-    bluecount = 0
-    yellowcount = 3
-    greencount = 4
-    redlittlemove = 0
-    bluelittlemove = 0
-    yellowlittlemove = 0
-    greenlittlemove = 0
-    changeArray = []
-    change_Array_sum = 0
-    numnum = 0
-    numnum1 = 0
-    numnum2 = 0
-    numnum3 = 0
-    numnum4 = 0
+    if( blurnow==0){
+
+    
+        canvas.clear()
+        $('.count').val(0)
+        redcount = -1
+        bluecount = 0
+        yellowcount = 3
+        greencount = 4
+        redlittlemove = 0
+        bluelittlemove = 0
+        yellowlittlemove = 0
+        greenlittlemove = 0
+        changeArray = []
+        change_Array_sum = 0
+        numnum = 0
+        numnum1 = 0
+        numnum2 = 0
+        numnum3 = 0
+        numnum4 = 0
+    }
+    
+   
 })
 
 $('.close_btn').click(function () {
