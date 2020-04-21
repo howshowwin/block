@@ -750,7 +750,7 @@ canvas.on('object:moving', function (e) {
     var clientXnow = e.e.clientX
 
     if (isAndroid || isiOS) {
-        var clientXnow = e.e.targetTouches[0].clientX
+        clientXnow = e.e.targetTouches[0].clientX
     }
 
 
