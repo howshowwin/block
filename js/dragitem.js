@@ -88,7 +88,34 @@ var push = false
 var image_q = new Array()
 
 function pushimg(e) {
-    if (truemove == 1) {
+ 
+    
+    document.body.removeChild(jijo);
+
+    var oriTop = e.changedTouches[0].clientY - e.target.height
+    var oriLeft = e.changedTouches[0].clientX - e.target.width
+    // if()
+    var mix_padding = (obj_padding) + (cursor_padding / 2)
+    // var mix_padding = 0
+
+    let nowwha = 1
+
+    if (oriTop - mix_padding < 0) {
+        oriTop = mix_padding
+    }
+    if (oriLeft < 0) {
+        oriLeft = 0
+    }
+    if (oriTop + movingImage.height > $('.canvas-container').height()) {
+        movingImage = ''
+    }
+    if (oriLeft + movingImage.width + mix_padding > $('.canvas-container').width() * 0.788) {
+        movingImage = ''
+        nowwha = 0
+
+    }
+
+    if (truemove == 1&&nowwha == 1) {
         console.log(movingImage.alt)
         let alt = movingImage.alt
         switch (alt) {
@@ -117,29 +144,6 @@ function pushimg(e) {
         }
         truemove = 0
     }
-    
-    document.body.removeChild(jijo);
-
-    var oriTop = e.changedTouches[0].clientY - e.target.height
-    var oriLeft = e.changedTouches[0].clientX - e.target.width
-    // if()
-    var mix_padding = (obj_padding) + (cursor_padding / 2)
-    // var mix_padding = 0
-
-
-    if (oriTop - mix_padding < 0) {
-        oriTop = mix_padding
-    }
-    if (oriLeft < 0) {
-        oriLeft = 0
-    }
-    if (oriTop + movingImage.height > $('.canvas-container').height()) {
-        oriTop = $('.canvas-container').height() - movingImage.height
-    }
-    if (oriLeft + movingImage.width + mix_padding > $('.canvas-container').width() * 0.788) {
-        oriLeft = $('.canvas-container').width() * 0.788 - movingImage.width - mix_padding
-    }
-
 
 
 
@@ -162,9 +166,11 @@ function pushimg(e) {
         borderColor: '#01B0F1'
     })
 
-    canvas.add(image_qq)
+    if(image_qq._element!=null){
+        canvas.add(image_qq)
+        image_q.push(image_qq)
+    }
 
-    image_q.push(image_qq)
     movingImage = ""
     setTimeout(function ww() {
         var items = canvas.getObjects()
