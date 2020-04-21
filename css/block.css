@@ -279,7 +279,9 @@ body {
 .img_block {
     cursor: pointer;
 }
-
+.img_block1 {
+    cursor: pointer;
+}
 .numlist {
     font-family: "微軟正黑體";
     text-align: center;
