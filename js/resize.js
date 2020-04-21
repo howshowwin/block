@@ -62,6 +62,7 @@ function convertSizeALL(className) {
     $('.mask').css({ width: Math.round(w * sRatio), height: Math.round(h * sRatio) });
     $('.info').css({ width: Math.round(755*0.89 * sRatio), height: Math.round(510*0.89 * sRatio) });
     $('.btn_close_inset').css({ width: Math.round(53 * sRatio), height: Math.round(53 * sRatio) });
+    $('.now_num').css({fontSize:Math.round(25 * sRatio)})
     canvas.setHeight(655 * sRatio);
     canvas.setWidth(1815 * sRatio);
     $('.canvas-container').css({ borderRadius: Math.round(20 * sRatio) })
