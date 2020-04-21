@@ -14,9 +14,16 @@ let imgDragOffset = {
 
 var oldimgX = ''
 var oldimgY = ''
+var str_className = ''
+var truemove = 0
 
 function saveImg(e) {
-
+    str_className = e.target.className
+    str_className = str_className.substring(9, 19)
+    console.log(str_className)
+    if (str_className == "img_block2") {
+        truemove = 1
+    }
     if (e.target.tagName.toLowerCase() === 'img') {
         movingSrc = e.target.src
         imgDragOffset.offsetX = e.clientX - e.target.offsetLeft
@@ -32,6 +39,12 @@ function saveImg(e) {
 var jijo = ''
 function saveFoneImg(e) {
 
+    str_className = e.target.className
+    str_className = str_className.substring(9, 19)
+    console.log(str_className)
+    if (str_className == "img_block2") {
+        truemove = 1
+    }
 
     if (e.target.tagName.toLowerCase() === 'img') {
 
@@ -46,8 +59,8 @@ function saveFoneImg(e) {
     document.body.appendChild(copyObj);
 
     copyObj.style.position = "absolute"
-    copyObj.style.top = e.target.y + "px"
-    copyObj.style.left = e.target.x + "px"
+    // copyObj.style.top = e.target.y + "px"
+    // copyObj.style.left = e.target.x + "px"
     copyObj.style.zIndex = "9999"
     copyObj.style.opacity = "0.6"
 
@@ -75,36 +88,38 @@ var push = false
 var image_q = new Array()
 
 function pushimg(e) {
-    // let yoyo = $('.canvas-container').offset().left
-    // let yoyot = $('.canvas-container').offset().top
+    if (truemove == 1) {
+        console.log(movingImage.alt)
+        let alt = movingImage.alt
+        switch (alt) {
+            case "1":
+                arrayOne.pop()
+                change_Array_sum = change_Array_sum - 1
+                break;
+            case "10":
+                arrayten.pop()
+                change_Array_sum = change_Array_sum - 10
 
-    // let offsetY = odY
-    // let offsetX = odX
+                break;
+            case "100":
+                arrayhun.pop()
+                change_Array_sum = change_Array_sum - 100
+
+                break;
+            case "1000":
+                arrayths.pop()
+                change_Array_sum = change_Array_sum - 1000
+
+                break;
+
+            default:
+                break;
+        }
+        truemove = 0
+    }
+    
     document.body.removeChild(jijo);
-    // let h
-    // if (e.changedTouches[0].clientY - yoyot - e.target.height / 2 < 0) {
-    //     h = 35
-    // } else if ((e.changedTouches[0].clientY - yoyot - e.target.height / 2 + e.target.height) > ($('.canvas_wrapper').height())) {
-    //     h = $('.canvas_wrapper').height() - e.target.height - 20
-    // } else {
-    //     h = e.changedTouches[0].clientY - yoyot - e.target.height / 2
-    // }
-    // let w
-    // if (e.changedTouches[0].clientX - yoyo - e.target.width / 2 < 0) {
-    //     w = 0
-    // }
-    // else if (e.changedTouches[0].clientX - yoyo - e.target.width / 2 + e.target.width > ($('.canvas_wrapper').width())) {
-    //     w = $('.canvas_wrapper').width() * 999 + e.target.width / 2
-    // }
-    // else {
-    //     w = e.changedTouches[0].clientX - yoyo - e.target.width
-    // }
 
-    // const { offsetX, offsetY } = e.e
-
-
-    // cursor_padding
-    // obj_padding
     var oriTop = e.changedTouches[0].clientY - e.target.height
     var oriLeft = e.changedTouches[0].clientX - e.target.width
     // if()
@@ -161,7 +176,7 @@ function pushimg(e) {
 
         }
         Array_sum = SumData(ArrTest)
-        $(".count").val(Array_sum)
+        $(".count").val(Array_sum + change_Array_sum)
     }, 500)
 
 
@@ -172,8 +187,37 @@ function pushimg(e) {
 
 function dropImg(e) {
     const { offsetX, offsetY } = e.e
+    // console.log(e.target.className)
+    console.log(movingImage)
+    if (truemove == 1) {
+        console.log(movingImage.alt)
+        let alt = movingImage.alt
+        switch (alt) {
+            case "1":
+                arrayOne.pop()
+                change_Array_sum = change_Array_sum - 1
+                break;
+            case "10":
+                arrayten.pop()
+                change_Array_sum = change_Array_sum - 10
 
+                break;
+            case "100":
+                arrayhun.pop()
+                change_Array_sum = change_Array_sum - 100
 
+                break;
+            case "1000":
+                arrayths.pop()
+                change_Array_sum = change_Array_sum - 1000
+
+                break;
+
+            default:
+                break;
+        }
+        truemove = 0
+    }
     // cursor_padding
     // obj_padding
 
@@ -224,7 +268,7 @@ function dropImg(e) {
 
         }
         Array_sum = SumData(ArrTest)
-        $(".count").val(Array_sum)
+        $(".count").val(Array_sum + change_Array_sum)
     }, 500)
 }
 
@@ -235,7 +279,7 @@ function dropImg(e) {
 //     e.preventDefault();
 // };
 
-var toucharea =  document.querySelector(".box")
+var toucharea = document.querySelector(".box")
 canvas.on('drop', dropImg)
 
 $('.defaultImg').mousedown(function () {
@@ -281,12 +325,12 @@ function getDirection(startx, starty, endx, endy) {
     return result;
 }
 //手指接觸螢幕
-toucharea.addEventListener("touchstart", function(e) {
+toucharea.addEventListener("touchstart", function (e) {
     startx = e.touches[0].pageX;
     starty = e.touches[0].pageY;
 }, false);
 //手指離開螢幕
-toucharea.addEventListener("touchend", function(e) {
+toucharea.addEventListener("touchend", function (e) {
     var endx, endy;
     endx = e.changedTouches[0].pageX;
     endy = e.changedTouches[0].pageY;
@@ -295,11 +339,11 @@ toucharea.addEventListener("touchend", function(e) {
         case 0:
             break;
         case 1:
-     
+
             var bgP = $('.img_box').css('backgroundSize')
             var jj = bgP.slice(5, 15)
             stagenum = stagenum - parseInt(jj) / 4
-        
+
             // //當滑輪向上滾動時 
             $('.img_box').css({
                 backgroundPosition: `0 ${Math.round(30 * sRSS) + stagenum}px`
@@ -309,7 +353,7 @@ toucharea.addEventListener("touchend", function(e) {
             var bgP = $('.img_box').css('backgroundSize')
             var jj = bgP.slice(5, 15)
             stagenum = parseInt(jj) / 4 + stagenum
-        
+
             $('.img_box').css({
                 backgroundPosition: `0 ${Math.round(30 * sRSS) + stagenum}px`
             })

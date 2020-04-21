@@ -1,15 +1,18 @@
 * {
     margin: 0;
     padding: 0;
-    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 
 body {
     position: relative;
 }
-.display_none{
+
+.display_none {
     display: none;
 }
+
 .background1 {
     background: url(../img/window2.jpg);
     background-size: cover;
@@ -30,28 +33,32 @@ body {
 .background {
     position: relative;
 }
-.showbox{
+
+.showbox {
     background: url(../img/box9.svg);
     background-size: cover;
     position: absolute;
     top: 1.7%;
     left: 1.8%;
 }
-.changeMoneyAreaTop{
+
+.changeMoneyAreaTop {
     background: url(../img/box7_1.png);
     background-size: cover;
     position: absolute;
     top: 1.7%;
     left: 80%;
 }
-.changeMoneyAreaBottom{
+
+.changeMoneyAreaBottom {
     background: url(../img/box7.png);
     background-size: cover;
     position: absolute;
     top: 5%;
     left: 80%;
 }
-.change_btn{
+
+.change_btn {
     background: url(../img/tRE2.svg);
     background-size: cover;
     position: absolute;
@@ -59,7 +66,8 @@ body {
     left: 80.1%;
     cursor: pointer;
 }
-.close_btn{
+
+.close_btn {
     background: url(../img/x.svg);
     background-size: cover;
     position: absolute;
@@ -67,7 +75,8 @@ body {
     left: 94.8%;
     cursor: pointer;
 }
-.useteach{
+
+.useteach {
     background: url(../img/btS.svg);
     background-size: cover;
     position: absolute;
@@ -75,14 +84,16 @@ body {
     left: 80%;
     cursor: pointer;
 }
-.countpic{
+
+.countpic {
     background: url(../img/newbox3.svg);
     background-size: cover;
     position: absolute;
     top: 80.5%;
     left: 64.8%;
 }
-.delete_btn{
+
+.delete_btn {
     background: url(../img/newbox4.svg);
     background-size: cover;
     position: absolute;
@@ -90,7 +101,8 @@ body {
     cursor: pointer;
     left: 74.6%;
 }
-.openorclosecount_btn{
+
+.openorclosecount_btn {
     background: url(../img/newbox3-1.svg);
     background-size: cover;
     position: absolute;
@@ -98,126 +110,198 @@ body {
     cursor: pointer;
     left: 65.3%;
 }
-.inputarea{
+
+.inputarea {
     background: url(../img/box1.png);
     background-size: cover;
     position: absolute;
 }
-.inputarea1{
+
+.inputarea1 {
     top: 89.5%;
     left: 11.3%;
 }
-.inputarea2{
+
+.inputarea2 {
     top: 89.5%;
     left: 31%;
 }
-.inputarea3{
+
+.inputarea3 {
     top: 89.5%;
     left: 43.2%;
 }
-.inputarea4{
+
+.inputarea4 {
     top: 89.5%;
     left: 55.5%;
 }
-.arrow{
+
+.arrow {
     background: url(../img/box2.png);
     background-size: cover;
     position: absolute;
     cursor: pointer;
 }
-.arrow1{
+
+.arrow1 {
     top: 93%;
     left: 17.6%;
 }
-.arrow2{
+
+.arrow2 {
     top: 93%;
     left: 37.3%;
 }
-.arrow3{
+
+.arrow3 {
     top: 93%;
     left: 49.6%;
 }
-.arrow4{
+
+.arrow4 {
     top: 93%;
     left: 61.8%;
 }
-.choosenum{
+
+.choosenum {
     background: url(../img/box5.png);
     background-size: cover;
     position: absolute;
     transform-origin: 50% 100%;
     transform: scale(0);
     transition: 0.2s;
-
 }
-.choosenum1{
+
+.choosenum1 {
     top: 26%;
     left: 11.5%;
 }
-.choosenum2{
+
+.choosenum2 {
     top: 26%;
     left: 31.2%;
 }
-.choosenum3{
+
+.choosenum3 {
     top: 26%;
     left: 43.5%;
 }
-.choosenum4{
+
+.choosenum4 {
     top: 26%;
     left: 55.7%;
 }
 
-.img_thd{
+.img_thd {
     position: absolute;
     top: 85%;
     left: 4.25%;
 }
-.img_hun{
+
+.img_hun {
     position: absolute;
     top: 88.5%;
     left: 22.1%;
-    
 }
-.img_ten{
-    
+
+.img_ten {
     position: absolute;
     top: 83.5%;
     left: 40.8%;
 }
-.img_one{
-    
+
+.img_one {
     position: absolute;
     top: 90.5%;
     left: 53%;
 }
-.numberframe{
+
+.img_thd1 {
+    position: absolute;
+    top: 14%;
+    left: 82.95%;
+}
+
+.img_hun1 {
+    position: absolute;
+    top: 33%;
+    left: 82.45%;
+}
+
+.img_ten1 {
+    position: absolute;
+    top: 14.6%;
+    left: 93.25%;
+}
+
+.img_one1 {
+    position: absolute;
+    top: 33.5%;
+    left: 93%;
+}
+
+
+.now_num{
+    font-size: 24px;
+    font-weight: 900;
+    color: #444;
+    position: absolute;
+}
+
+.thd1_num{
+    top: 24%;
+    left: 88%;
+}
+
+.hun1_num{
+    top: 36%;
+    left: 88%;
+}
+.ten1_num{
+    top: 23.6%;
+    left: 94%;
+}
+.one1_num {
+    top: 35.8%;
+    left: 94%;
+}
+
+
+
+
+.numberframe {
     position: absolute;
     top: 2%;
     left: 8%;
 }
-.img_block{
-    cursor: pointer;
 
+.img_block {
+    cursor: pointer;
 }
-.numlist{
+
+.numlist {
     font-family: "微軟正黑體";
     text-align: center;
     font-weight: 700;
     color: #555;
     cursor: pointer;
 }
-.numlist:hover{
+
+.numlist:hover {
     background: #95C97E;
     color: #fff;
 }
-.dragselected{
+
+.dragselected {
     background: url(../img/tR1.svg);
     background-size: cover;
     position: absolute;
     top: 48.3%;
     left: 80%;
 }
-.selectedframe{
+
+.selectedframe {
     /* background: #95C97E; */
     position: absolute;
     top: 49%;
@@ -225,20 +309,22 @@ body {
     pointer-events: none;
     /* opacity: 0.5; */
 }
-.box{
+
+.box {
     position: absolute;
     top: 49%;
     left: 80.6%;
-    overflow: hidden; 
+    overflow: hidden;
     cursor: pointer;
-    scroll-snap-type : center ;
+    scroll-snap-type: center;
 }
-.img_box{
+
+.img_box {
     background: url(../img/555.svg);
-    
     transition: cubic-bezier(0.785, 0.135, 0.15, 0.86) 0.5s;
 }
-.movetopbtn{
+
+.movetopbtn {
     background: url(../img/tRL.png);
     background-size: cover;
     position: absolute;
@@ -246,79 +332,86 @@ body {
     left: 81%;
     cursor: pointer;
 }
-.movedownbtn{
+
+.movedownbtn {
     background: url(../img/tRR.png);
     background-size: cover;
     position: absolute;
     top: 61%;
     left: 81%;
-    
     cursor: pointer;
 }
 
-.enter_input{
+.enter_input {
     font-family: "微軟正黑體";
     position: absolute;
     font-weight: 700;
     background: none;
     outline: none;
     border: 0px;
-    text-align:right;
-
+    text-align: right;
 }
-.enter_thd{
+
+.enter_thd {
     top: 92%;
     left: 12.6%;
     color: #666;
 }
-.enter_hrd{
+
+.enter_hrd {
     top: 92%;
     left: 32.2%;
     color: #666;
 }
-.enter_ten{
+
+.enter_ten {
     top: 92%;
     left: 44.5%;
     color: #666;
 }
-.enter_one{
+
+.enter_one {
     top: 92%;
     left: 56.8%;
     color: #666;
 }
-.count{
+
+.count {
     font-family: "微軟正黑體";
     position: absolute;
     font-weight: 700;
     background: none;
     outline: none;
     border: 0px;
-    text-align:center;
+    text-align: center;
     top: 86.0%;
     left: 67.5%;
     color: #666;
-
 }
-.mask{
+
+.mask {
     position: absolute;
     top: 0%;
     background: rgba(102, 102, 102, 0.541);
     z-index: 99;
     left: 0%;
 }
-.canvas-container{
+
+.canvas-container {
     position: absolute;
     top: 3.5%;
     left: 3.2%;
 }
-.info{
+
+.info {
     background: url(../img/window2.png);
     background-size: cover;
     position: absolute;
     top: 25%;
     left: 32.5%;
 }
-.btn_close_inset{
+
+.btn_close_inset {
     background: url(../img/wX.png);
     background-size: cover;
     position: absolute;

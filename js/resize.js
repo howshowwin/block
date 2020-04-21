@@ -45,6 +45,10 @@ function convertSizeALL(className) {
     $('.img_hun').css({ width: Math.round(164 * 0.8 * sRatio), height: Math.round(53 * 0.8 * sRatio) });
     $('.img_ten').css({ width: Math.round(19 * 0.75 * sRatio), height: Math.round(129 * 0.75 * sRatio) });
     $('.img_one').css({ width: Math.round(29 * 0.8 * sRatio), height: Math.round(27 * 0.8 * sRatio) });
+    $('.img_thd1').css({ width: Math.round(125 *0.95*  sRatio), height: Math.round(115 *0.95* sRatio) });
+    $('.img_hun1').css({ width: Math.round(164 * 0.8 * sRatio), height: Math.round(53 * 0.8 * sRatio) });
+    $('.img_ten1').css({ width: Math.round(19 * 0.75 * sRatio), height: Math.round(129 * 0.75 * sRatio) });
+    $('.img_one1').css({ width: Math.round(29 * 0.8 * sRatio), height: Math.round(27 * 0.8 * sRatio) });
     $('.numberframe').css({ width: Math.round(125 * sRatio), borderRadius: Math.round(5 * sRatio) });
     $('.numlist').css({height: Math.round(54.2 * sRatio),fontSize:Math.round(35 * sRatio)})
     $('.dragselected').css({ width: Math.round(355 * sRatio), height: Math.round(200 * sRatio) });

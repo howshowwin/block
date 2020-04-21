@@ -1,4 +1,11 @@
 function idontknowwhatiwrite() {
+    arrayOne=[]
+    arrayten=[]
+    arrayhun=[]
+    arrayths=[]
+    changeArray = []
+    change_Array_sum = 0
+    
     var redcount = -1
     var bluecount = 0
     var yellowcount = 1
