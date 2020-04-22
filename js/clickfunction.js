@@ -852,43 +852,43 @@ var change_Array_sum = 0
 
 setInterval(function () {
     if (arrayths.length != 0) {
-        $('.img_thd1').removeClass('display_none')
-        $('.thd1_num').removeClass('display_none')
+        $('.img_thd1').removeClass('opc0')
+        $('.thd1_num').removeClass('opc0')
         $('.thd1_num .num_span').text(arrayths.length)
     } else {
-        $('.img_thd1').addClass('display_none')
-        $('.thd1_num').addClass('display_none')
+        $('.img_thd1').addClass('opc0')
+        $('.thd1_num').addClass('opc0')
         $('.thd1_num .num_span').text(0)
     }
 
     if (arrayhun.length != 0) {
-        $('.img_hun1').removeClass('display_none')
-        $('.hun1_num').removeClass('display_none')
+        $('.img_hun1').removeClass('opc0')
+        $('.hun1_num').removeClass('opc0')
         $('.hun1_num .num_span').text(arrayhun.length)
 
     } else {
-        $('.img_hun1').addClass('display_none')
-        $('.hun1_num').addClass('display_none')
+        $('.img_hun1').addClass('opc0')
+        $('.hun1_num').addClass('opc0')
         $('.hun1_num .num_span').text(0)
     }
     if (arrayten.length != 0) {
-        $('.img_ten1').removeClass('display_none')
-        $('.ten1_num').removeClass('display_none')
+        $('.img_ten1').removeClass('opc0')
+        $('.ten1_num').removeClass('opc0')
         $('.ten1_num .num_span').text(arrayten.length)
 
     } else {
-        $('.img_ten1').addClass('display_none')
-        $('.ten1_num').addClass('display_none')
+        $('.img_ten1').addClass('opc0')
+        $('.ten1_num').addClass('opc0')
         $('.ten1_num .num_span').text(0)
     }
     if (arrayOne.length != 0) {
-        $('.img_one1').removeClass('display_none')
-        $('.one1_num').removeClass('display_none')
+        $('.img_one1').removeClass('opc0')
+        $('.one1_num').removeClass('opc0')
         $('.one1_num .num_span').text(arrayOne.length)
 
     } else {
-        $('.img_one1').addClass('display_none')
-        $('.one1_num').addClass('display_none')
+        $('.img_one1').addClass('opc0')
+        $('.one1_num').addClass('opc0')
         $('.one1_num .num_span').text(0)
     }
 }, 100)

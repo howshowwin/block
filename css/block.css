@@ -12,7 +12,10 @@ body {
 .display_none {
     display: none;
 }
-
+.opc0{
+    opacity: 0;
+    pointer-events: none;
+}
 .background1 {
     background: url(../img/window2.jpg);
     background-size: cover;
