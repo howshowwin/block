@@ -1,3 +1,38 @@
+
+if (set_pic_info.length > 1) {
+    $('.info-btn-right').removeClass('display_none')
+}
+var picnowdisplay = 0
+var picenddisplay = set_pic_info.length -1
+$('.info-btn-right').click(function () {
+    picnowdisplay++
+    $('.info-page').css({
+        background: `url(setpic/${set_pic_info[picnowdisplay]})`,
+        backgroundSize: "cover"
+    })
+    if(picnowdisplay==picenddisplay){
+        $('.info-btn-right').addClass('display_none')
+    }
+    if(picnowdisplay!=0){
+        $('.info-btn-left').removeClass('display_none')
+    }
+})
+$('.info-btn-left').click(function () {
+    picnowdisplay--
+    $('.info-page').css({
+        background: `url(setpic/${set_pic_info[picnowdisplay]})`,
+        backgroundSize: "cover"
+    })
+    if(picnowdisplay==0){
+        $('.info-btn-left').addClass('display_none')
+    }
+    if(picnowdisplay!=picenddisplay){
+        $('.info-btn-right').removeClass('display_none')
+    }
+
+})
+
+
 var stagenum = 0
 
 var scrollFunc = function (e) {
@@ -326,7 +361,15 @@ $('.count').blur(function (e) {
 })
 
 $('.useteach').click(function () {
+    picnowdisplay = 0
+
     $('.mask').removeClass("display_none")
+    $('.info-page').css({
+        background: `url(setpic/${set_pic_info[picnowdisplay]})`,
+        backgroundSize: "cover"
+    })
+    $('.info-btn-right').removeClass('display_none')
+    $('.info-btn-left').addClass('display_none')
 })
 $('.btn_close_inset').click(function () {
     $('.mask').addClass("display_none")
@@ -581,14 +624,158 @@ fabric.Canvas.prototype.customiseControls({
 })
 
 
+
+
+
+fabric.Canvas.prototype.customiseControls({
+    bl: {
+        action: function () {
+
+        },
+        cursor: 'pointer'
+
+    },
+    br: {
+        action: function () {
+
+        },
+        cursor: 'pointer'
+    },
+}, function () {
+
+    canvas.renderAll()
+})
+
+
+
+
+
+
 var objseleted
 
 canvas.on('selection:updated', function (e) {
+    fabric.Canvas.prototype.customiseControls({
+        bl: {
+            action: function () {
+
+            },
+            cursor: 'pointer'
+
+        },
+        br: {
+            action: function () {
+
+            },
+            cursor: 'pointer'
+        },
+    }, function () {
+
+        canvas.renderAll()
+    })
     setTimeout(function () {
         objseleted = e.target.cacheKey
         console.log(objseleted)
     }, 120)
+    setTimeout(function () {
+        objscalerotate = e.target.cacheKey
+        console.log(objseleted)
+        fabric.Canvas.prototype.customiseControls({
+            tl: {
+                action: function () {
 
+                }
+            },
+            tr: {
+                action: function (e) {
+
+
+                    var ji = canvas.getActiveObject()
+                    console.log(ji)
+                    console.log(objseleted)
+                    if (ji.cacheKey == objseleted) {
+                        if (ji) {
+
+                            canvas.remove(ji)
+                        }
+                    }
+                    if (ji._objects) {
+                        function getSelection() {
+
+                            return canvas.getActiveObject() == null ? canvas.getActiveGroup() : canvas.getActiveObject()
+                        }
+
+                        var o = getSelection();
+
+                        o._objects.forEach(function (object, key) {
+
+                            canvas.remove(object);
+                        });
+                        canvas.discardActiveObject()
+
+                    }
+
+
+
+                    canvas.renderAll();
+
+                    setTimeout(function ww() {
+                        var items = canvas.getObjects()
+                        var Array_sum
+                        var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+                        for (i = 0; i < items.length; i++) {
+                            ArrTest[i] = parseInt(items[i]._element.alt)
+
+                        }
+                        Array_sum = SumData(ArrTest)
+                        $(".count").val(Array_sum)
+                    }, 500)
+
+
+
+
+                },
+                cursor: 'pointer'
+            },
+            bl: {
+                action: 'rotate',
+                cursor: 'pointer'
+
+            },
+            br: {
+                action: "scale",
+                cursor: 'pointer'
+            },
+            mb: {
+                action: function () {
+
+                }
+            },
+            mt: {
+                action: function () {
+
+                }
+            },
+            ml: {
+                action: function () {
+
+                }
+            },
+            mr: {
+                action: function () {
+
+                }
+            },
+            mtr: {
+                action: function () {
+
+                }
+            },
+        }, function () {
+
+            canvas.renderAll()
+        })
+    }, 500)
 });
 
 
@@ -599,6 +786,25 @@ canvas.on('selection:updated', function (e) {
 
 
 canvas.on('object:selected', e => {
+    fabric.Canvas.prototype.customiseControls({
+        bl: {
+            action: function () {
+
+            },
+            cursor: 'pointer'
+
+        },
+        br: {
+            action: function () {
+
+            },
+            cursor: 'pointer'
+        },
+    }, function () {
+
+        canvas.renderAll()
+    })
+
     if (e.target) {
         console.log(e)
         e.target.bringToFront()
@@ -606,6 +812,106 @@ canvas.on('object:selected', e => {
             objseleted = e.target.cacheKey
             console.log(objseleted)
         }, 120)
+        setTimeout(function () {
+            objscalerotate = e.target.cacheKey
+            console.log(objseleted)
+            fabric.Canvas.prototype.customiseControls({
+                tl: {
+                    action: function () {
+
+                    }
+                },
+                tr: {
+                    action: function (e) {
+
+
+                        var ji = canvas.getActiveObject()
+                        console.log(ji)
+                        console.log(objseleted)
+                        if (ji.cacheKey == objseleted) {
+                            if (ji) {
+
+                                canvas.remove(ji)
+                            }
+                        }
+                        if (ji._objects) {
+                            function getSelection() {
+
+                                return canvas.getActiveObject() == null ? canvas.getActiveGroup() : canvas.getActiveObject()
+                            }
+
+                            var o = getSelection();
+
+                            o._objects.forEach(function (object, key) {
+
+                                canvas.remove(object);
+                            });
+                            canvas.discardActiveObject()
+
+                        }
+
+
+
+                        canvas.renderAll();
+
+                        setTimeout(function ww() {
+                            var items = canvas.getObjects()
+                            var Array_sum
+                            var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+                            for (i = 0; i < items.length; i++) {
+                                ArrTest[i] = parseInt(items[i]._element.alt)
+
+                            }
+                            Array_sum = SumData(ArrTest)
+                            $(".count").val(Array_sum)
+                        }, 500)
+
+
+
+
+                    },
+                    cursor: 'pointer'
+                },
+                bl: {
+                    action: 'rotate',
+                    cursor: 'pointer'
+
+                },
+                br: {
+                    action: "scale",
+                    cursor: 'pointer'
+                },
+                mb: {
+                    action: function () {
+
+                    }
+                },
+                mt: {
+                    action: function () {
+
+                    }
+                },
+                ml: {
+                    action: function () {
+
+                    }
+                },
+                mr: {
+                    action: function () {
+
+                    }
+                },
+                mtr: {
+                    action: function () {
+
+                    }
+                },
+            }, function () {
+
+                canvas.renderAll()
+            })
+        }, 500)
     }
 
 
@@ -1399,7 +1705,7 @@ $('.change_btn').click(function () {
             arrayhun = []
             arrayths = []
         } else {
-            alert(`兌換後最大數不得大於50，目前兌換區域總數為${change_Array_sum}，請去除${change_Array_sum - 50}後再兌換，或另外選擇兌換單位`)
+            alert(`兌換後數值已大於50，請調整後再進行兌換。`)
         }
     }
     if (o == 1 && change_Array_sum > 0) {
@@ -1833,10 +2139,466 @@ $('.change_btn').click(function () {
             arrayten = []
             arrayhun = []
             arrayths = []
-        } else if (change_Array_sum > 500) {
-            alert(`兌換後最大數不得大於50，目前兌換區域總數為${change_Array_sum}，請去除${change_Array_sum - 500}後再兌換，或另外選擇兌換單位`)
+        } else if (Math.floor(change_Array_sum / 10) > 50) {
+            alert(`兌換後數值已大於50，請調整後再進行兌換。`)
         } else {
-            alert(`目前要兌換數值為${change_Array_sum}，無法整除，請去除${change_Array_sum % 10}後再兌換`)
+            let remaining = change_Array_sum % 10
+            change_Array_sum = change_Array_sum - change_Array_sum % 10
+            count22 = -1
+            numnum = -1
+            if (o == 1) {
+                count22 += 1
+            }
+
+            littlemove += 10
+
+            if (littlemove > 30) {
+                littlemove = 0
+            }
+
+            var arr_one = new Array()
+            for (i = 0; i < change_Array_sum / 10; i++) {
+                var s_1 = 0
+                var s_1_1 = 0
+                // var w = 0 
+                const imgEl_1 = document.createElement('img')
+                imgEl_1.src = "img/newc10.svg"
+                imgEl_1.alt = '10'
+
+                imgEl_1.onload = (e) => {
+
+
+                    const image = new fabric.Image(imgEl_1, {
+                        width: e.target.naturalWidth,
+                        height: e.target.naturalHeight,
+                        scaleX: parseInt($('.img_ten').width()) / e.target.naturalWidth,
+                        scaleY: parseInt($('.img_ten').height()) / e.target.naturalHeight,
+
+                        top: 20 * sRSS,
+                        left: (1500 + Math.random() * 250) * sRSS
+                    })
+                    canvas.add(image)
+
+                    image.alt = 1
+                    image.set({
+                        borderColor: '#01B0F1'
+                    })
+
+
+
+                    canvas.renderAll();
+
+
+                    image._element.alt = '10'
+                    arr_one.push(image)
+                    const om = 300
+                    var nowchange2 = om / arr_one.length
+                    for (i = 0; i < arr_one.length; i++) {
+                        arr_one[i].left = (1500 + i * nowchange2) * sRSS
+                    }
+
+                    var maxWidthRed = 265 * sRSS
+                    // for (i = 0; i < arr_one.length; i++) {
+                    if (arr_one.length <= 5) {
+                        s_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
+                                duration: 600 + s_1 * 5,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (45 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 600 + s_1 * 5,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                        }
+
+                    } else if (arr_one.length > 5 && arr_one.length <= 10) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (125 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+
+                    } else if (arr_one.length > 10 && arr_one.length <= 15) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 10), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (205 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    } else if (arr_one.length > 15 && arr_one.length <= 20) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 15), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (285 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 20 && arr_one.length <= 25) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 20), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (365 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    else if (arr_one.length > 25 && arr_one.length <= 30) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 25), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (445 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    else if (arr_one.length > 30 && arr_one.length <= 35) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 30), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (525 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+                    else if (arr_one.length > 35 && arr_one.length <= 40) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 35), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (605 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 40 && arr_one.length <= 45) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 40), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (685 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 45 && arr_one.length <= 50) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 45), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (765 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    canvas.discardActiveObject();
+
+
+                    for (i = 0; i < changeArray.length; i++) {
+
+                        canvas.remove(changeArray[i])
+
+                    }
+
+
+
+                    changeArray = []
+                    change_Array_sum = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+            }
+            let ch500 = remaining
+            if ((ch500 - 1) >= 0 && arrayOne.length != 0) {
+                for (i = 0; i < arrayOne.length; i++) {
+                    ch500 = ch500 - 1
+                    if ((ch500 - 1) < 0) {
+                        arrayOne = arrayOne.splice(0, i + 1)
+                        break
+                    }
+                }
+            } else {
+                arrayOne = []
+            }
+            arrayten = []
+            arrayhun = []
+            arrayths = []
+            setTimeout(function () {
+                let stage = new Array()
+                function pusharray(arr) {
+                    for (i = 0; i < arr.length; i++) {
+                        stage.push(parseInt(arr[i]._element.alt))
+                    }
+                }
+                changeArray = []
+                changeArray = changeArray.concat(arrayOne)
+            
+
+                pusharray(changeArray)
+                change_Array_sum = SumData(stage)
+
+            }, 200)
         }
 
 
@@ -2281,10 +3043,485 @@ $('.change_btn').click(function () {
             arrayten = []
             arrayhun = []
             arrayths = []
-        } else if (change_Array_sum > 5000) {
-            alert(`兌換後最大數不得大於50，目前兌換區域總數為${change_Array_sum}，請去除${change_Array_sum - 5000}後再兌換，或另外選擇兌換單位`)
+        } else if (Math.floor(change_Array_sum / 100) > 50) {
+            alert(`兌換後數值已大於50，請調整後再進行兌換。`)
         } else {
-            alert(`目前要兌換數值為${change_Array_sum}，無法整除，請去除${change_Array_sum % 100}後再兌換`)
+            let remaining = change_Array_sum % 100
+            change_Array_sum = change_Array_sum - change_Array_sum % 100
+            count22 = -1
+            numnum = -1
+            if (o == 2) {
+                count22 += 1
+            }
+
+            littlemove += 10
+
+            if (littlemove > 30) {
+                littlemove = 0
+            }
+
+            var arr_one = new Array()
+            for (i = 0; i < change_Array_sum / 100; i++) {
+                var s_1 = 0
+                var s_1_1 = 0
+                // var w = 0 
+                const imgEl_1 = document.createElement('img')
+                imgEl_1.src = "img/newc100.svg"
+                imgEl_1.alt = '100'
+
+                imgEl_1.onload = (e) => {
+
+
+                    const image = new fabric.Image(imgEl_1, {
+                        width: e.target.naturalWidth,
+                        height: e.target.naturalHeight,
+                        scaleX: parseInt($('.img_hun').width()) / e.target.naturalWidth,
+                        scaleY: parseInt($('.img_hun').height()) / e.target.naturalHeight,
+
+                        top: 20 * sRSS,
+                        left: (1500 + Math.random() * 250) * sRSS
+                    })
+                    canvas.add(image)
+
+                    image.alt = 100
+                    image.set({
+                        borderColor: '#01B0F1'
+                    })
+
+
+
+                    canvas.renderAll();
+
+
+                    image._element.alt = '100'
+                    arr_one.push(image)
+                    const oom = 180
+                    var nowchange3 = oom / arr_one.length
+                    for (i = 0; i < arr_one.length; i++) {
+                        arr_one[i].left = (1500 + i * nowchange3) * sRSS
+                    }
+
+                    var maxWidthRed = 265 * sRSS
+                    // for (i = 0; i < arr_one.length; i++) {
+                    if (arr_one.length <= 5) {
+                        s_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
+                                duration: 600 + s_1 * 5,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (45 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 600 + s_1 * 5,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                        }
+
+                    } else if (arr_one.length > 5 && arr_one.length <= 10) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (165 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+
+                    } else if (arr_one.length > 10 && arr_one.length <= 15) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 10), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (285 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    } else if (arr_one.length > 15 && arr_one.length <= 20) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 15), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (405 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 20 && arr_one.length <= 25) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 20), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (525 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    else if (arr_one.length > 25 && arr_one.length <= 30) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 25), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (645 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    else if (arr_one.length > 30 && arr_one.length <= 35) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 30), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (765 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+                    else if (arr_one.length > 35 && arr_one.length <= 40) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 35), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (885 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 40 && arr_one.length <= 45) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 40), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (1005 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 45 && arr_one.length <= 50) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 45), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (1125 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    canvas.discardActiveObject();
+
+
+                    for (i = 0; i < changeArray.length; i++) {
+
+                        canvas.remove(changeArray[i])
+
+                    }
+
+
+
+                    changeArray = []
+                    change_Array_sum = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+            }
+
+            let ch500 = remaining
+            if ((ch500 - 10) >= 0 && arrayten.length != 0) {
+                for (i = 0; i < arrayten.length; i++) {
+                    ch500 = ch500 - 10
+                    if ((ch500 - 10) < 0) {
+                        arrayten = arrayten.splice(0, i + 1)
+                        break
+                    }
+                }
+            } else {
+                arrayten = []
+            }
+
+            if ((ch500 - 1) >= 0 && arrayOne.length != 0) {
+                for (i = 0; i < arrayOne.length; i++) {
+                    ch500 = ch500 - 1
+                    if ((ch500 - 1) < 0) {
+                        arrayOne = arrayOne.splice(0, i + 1)
+                        break
+                    }
+                }
+            } else {
+                arrayOne = []
+            }
+
+            arrayhun = []
+            arrayths = []
+
+
+            setTimeout(function () {
+                let stage = new Array()
+                function pusharray(arr) {
+                    for (i = 0; i < arr.length; i++) {
+                        stage.push(parseInt(arr[i]._element.alt))
+                    }
+                }
+                changeArray = []
+                changeArray = changeArray.concat(arrayOne)
+                changeArray = changeArray.concat(arrayten)
+
+            
+
+                pusharray(changeArray)
+                change_Array_sum = SumData(stage)
+
+            }, 200)
+
         }
 
 
@@ -2728,10 +3965,497 @@ $('.change_btn').click(function () {
             arrayten = []
             arrayhun = []
             arrayths = []
-        } else if (change_Array_sum > 50000) {
-            alert(`兌換後最大數不得大於50，目前兌換區域總數為${change_Array_sum}，請去除${change_Array_sum - 50000}後再兌換`)
+        } else if (Math.floor(change_Array_sum / 1000) > 50) {
+            alert(`兌換後數值已大於50，請調整後再進行兌換。`)
+
         } else {
-            alert(`目前要兌換數值為${change_Array_sum}，無法整除，請去除${change_Array_sum % 1000}後再兌換`)
+            let remaining = change_Array_sum % 1000
+            change_Array_sum = change_Array_sum - change_Array_sum % 1000
+            count22 = -1
+            numnum = -1
+            if (o == 3) {
+                count22 += 1
+            }
+
+            littlemove += 10
+
+            if (littlemove > 30) {
+                littlemove = 0
+            }
+
+            var arr_one = new Array()
+            for (i = 0; i < change_Array_sum / 1000; i++) {
+                var s_1 = 0
+                var s_1_1 = 0
+                // var w = 0 
+                const imgEl_1 = document.createElement('img')
+                imgEl_1.src = "img/newc1000.svg"
+                imgEl_1.alt = '1000'
+
+                imgEl_1.onload = (e) => {
+
+
+                    const image = new fabric.Image(imgEl_1, {
+                        width: e.target.naturalWidth,
+                        height: e.target.naturalHeight,
+                        scaleX: parseInt($('.img_thd').width()) / e.target.naturalWidth,
+                        scaleY: parseInt($('.img_thd').height()) / e.target.naturalHeight,
+
+                        top: 20 * sRSS,
+                        left: (1500 + Math.random() * 250) * sRSS
+                    })
+                    canvas.add(image)
+
+                    image.alt = 1000
+                    image.set({
+                        borderColor: '#01B0F1'
+                    })
+
+
+
+                    canvas.renderAll();
+
+
+                    image._element.alt = '1000'
+                    arr_one.push(image)
+                    const oom = 180
+                    var nowchange4 = oom / arr_one.length
+                    for (i = 0; i < arr_one.length; i++) {
+                        arr_one[i].left = (1500 + i * nowchange4) * sRSS
+                    }
+                    var maxWidthRed = 265 * sRSS
+                    // for (i = 0; i < arr_one.length; i++) {
+                    if (arr_one.length <= 5) {
+                        s_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * numnum, {
+                                duration: 600 + s_1 * 5,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (45 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 600 + s_1 * 5,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                        }
+
+                    } else if (arr_one.length > 5 && arr_one.length <= 10) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 5), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (165 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+
+                    } else if (arr_one.length > 10 && arr_one.length <= 15) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 10), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (285 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    } else if (arr_one.length > 15 && arr_one.length <= 20) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 15), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (405 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 20 && arr_one.length <= 25) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 20), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (525 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    else if (arr_one.length > 25 && arr_one.length <= 30) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 25), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (645 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    else if (arr_one.length > 30 && arr_one.length <= 35) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 30), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (765 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+                    else if (arr_one.length > 35 && arr_one.length <= 40) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 35), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (885 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 40 && arr_one.length <= 45) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 40), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (1005 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+                    else if (arr_one.length > 45 && arr_one.length <= 50) {
+                        s_1_1 += 10
+                        image.animate('top', 40 * sRSS + 120 * sRSS, {
+                            duration: 300 + s_1,
+                            onChange: canvas.renderAll.bind(canvas),
+
+                            easing: fabric.util.ease.easeInOutExpo,
+                            onComplete: function () {
+
+                                gototheway(numnum)
+                            }
+                        })
+
+
+
+                        function gototheway() {
+                            numnum++
+                            image.animate('top', 40 * sRSS + 120 * sRSS * (numnum - 45), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+                            image.animate('left', (1125 * sRSS) + (maxWidthRed * count22) + (littlemove * sRSS), {
+                                duration: 800 + s_1,
+                                onChange: canvas.renderAll.bind(canvas),
+
+                                easing: fabric.util.ease.easeInOutExpo
+                            })
+
+                        }
+
+                    }
+
+
+                    canvas.discardActiveObject();
+
+
+                    for (i = 0; i < changeArray.length; i++) {
+
+                        canvas.remove(changeArray[i])
+
+                    }
+
+
+
+                    changeArray = []
+                    change_Array_sum = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+            }
+
+
+            let ch500 = remaining
+            if ((ch500 - 100) >= 0 && arrayhun.length != 0) {
+                for (i = 0; i < arrayhun.length; i++) {
+                    ch500 = ch500 - 100
+                    if ((ch500 - 100) < 0) {
+                        arrayhun = arrayhun.splice(0, i + 1)
+                        break
+                    }
+                }
+            } else {
+                arrayhun = []
+            }
+
+          
+            if ((ch500 - 10) >= 0 && arrayten.length != 0) {
+                for (i = 0; i < arrayten.length; i++) {
+                    ch500 = ch500 - 10
+                    if ((ch500 - 10) < 0) {
+                        arrayten = arrayten.splice(0, i + 1)
+                        break
+                    }
+                }
+            } else {
+                arrayten = []
+            }
+
+            if ((ch500 - 1) >= 0 && arrayOne.length != 0) {
+                for (i = 0; i < arrayOne.length; i++) {
+                    ch500 = ch500 - 1
+                    if ((ch500 - 1) < 0) {
+                        arrayOne = arrayOne.splice(0, i + 1)
+                        break
+                    }
+                }
+            } else {
+                arrayOne = []
+            }
+
+            arrayths = []
+
+
+            setTimeout(function () {
+                let stage = new Array()
+                function pusharray(arr) {
+                    for (i = 0; i < arr.length; i++) {
+                        stage.push(parseInt(arr[i]._element.alt))
+                    }
+                }
+                changeArray = []
+                changeArray = changeArray.concat(arrayOne)
+                changeArray = changeArray.concat(arrayten)
+                changeArray = changeArray.concat(arrayhun)
+                pusharray(changeArray)
+                change_Array_sum = SumData(stage)
+
+            }, 200)
+
+
         }
 
 
@@ -2760,5 +4484,57 @@ $('.change_btn').click(function () {
 
     }, 500)
 
+
+})
+
+var clickappend = 0
+var clickrow = 0
+var clicklittlemove = 0
+
+
+$('.defaultImg').click(function (e) {
+    let movingImage = e.target
+    const image_qq = new fabric.Image(movingImage, {
+        width: movingImage.naturalWidth,
+        height: movingImage.naturalHeight,
+        scaleX: movingImage.width / movingImage.naturalWidth,
+        scaleY: movingImage.height / movingImage.naturalHeight,
+        top: 40 * sRSS + 110 * clickappend * sRSS,
+        left: 30 * sRSS + clickrow * 135 * sRSS + clicklittlemove * sRSS,
+        lockScalingFlip: true
+    })
+    image_qq.alt = 1
+    image_qq.set({
+        borderColor: '#01B0F1'
+    })
+    clickappend++
+    if (clickappend == 5) {
+        clickrow++
+        clickappend = 0
+    }
+    if (clickrow == 10) {
+        clickrow = 0
+        clicklittlemove += 10
+    }
+    if (clicklittlemove > 10) {
+        clicklittlemove = 0
+    }
+    image_q.push(image_qq)
+
+    canvas.add(image_qq)
+    movingImage = ""
+    setTimeout(function ww() {
+        var items = canvas.getObjects()
+        var Array_sum
+        var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+        for (i = 0; i < items.length; i++) {
+            ArrTest[i] = parseInt(items[i]._element.alt)
+
+        }
+        Array_sum = SumData(ArrTest)
+        $(".count").val(Array_sum + change_Array_sum)
+
+    }, 500)
 
 })

@@ -45,28 +45,22 @@ body {
     left: 1.8%;
 }
 
-.changeMoneyAreaTop {
-    background: url(../img/box7_1.png);
+
+
+.changeMoneyAreaBottom {
+    background: url(../img/box10.png);
     background-size: cover;
     position: absolute;
     top: 1.7%;
     left: 80%;
 }
 
-.changeMoneyAreaBottom {
-    background: url(../img/box7.png);
-    background-size: cover;
-    position: absolute;
-    top: 5%;
-    left: 80%;
-}
-
 .change_btn {
-    background: url(../img/tRE2.svg);
+    background: url(../img/newtRE2.png);
     background-size: cover;
     position: absolute;
-    top: 71.5%;
-    left: 80.1%;
+    top: 67.5%;
+    left: 81.25%;
     cursor: pointer;
 }
 
@@ -309,16 +303,16 @@ body {
 .selectedframe {
     /* background: #95C97E; */
     position: absolute;
-    top: 49%;
-    left: 80.6%;
+    top: 46.4%;
+    left: 81.3%;
     pointer-events: none;
     /* opacity: 0.5; */
 }
 
 .box {
     position: absolute;
-    top: 49%;
-    left: 80.6%;
+    top: 46.4%;
+    left: 81.3%;
     overflow: hidden;
     cursor: pointer;
     scroll-snap-type: center;
@@ -333,8 +327,8 @@ body {
     background: url(../img/tRL.png);
     background-size: cover;
     position: absolute;
-    top: 53%;
-    left: 81%;
+    top: 50%;
+    left: 94%;
     cursor: pointer;
 }
 
@@ -342,8 +336,8 @@ body {
     background: url(../img/tRR.png);
     background-size: cover;
     position: absolute;
-    top: 61%;
-    left: 81%;
+    top: 59%;
+    left: 94%;
     cursor: pointer;
 }
 
@@ -409,11 +403,11 @@ body {
 }
 
 .info {
-    background: url(../img/window2.png);
+    background: url(../img/newwindow.svg);
     background-size: cover;
     position: absolute;
-    top: 25%;
-    left: 32.5%;
+    top: 10%;
+    left: 21%;
 }
 
 .btn_close_inset {
@@ -421,6 +415,28 @@ body {
     background-size: cover;
     position: absolute;
     top: 6.5%;
-    left: 88%;
+    left: 91%;
     cursor: pointer;
+}
+.info-page{
+    background: url(../setpic/page1.svg);
+    background-size: cover;
+    position: absolute;
+    top:2.85%;
+    left: 1.79%;
+}
+.info-btn-left{
+    background: url(../img/wL.png);
+    background-size: cover;
+    position: absolute;
+    top:48%;
+    left: 3.5%;
+
+}
+.info-btn-right{
+    background: url(../img/wR.png);
+    background-size: cover;
+    position: absolute;
+    top:48%;
+    left: 93%;
 }
