@@ -52,8 +52,8 @@ function convertSizeALL(className) {
     $('.numberframe').css({ width: Math.round(125 * sRatio), borderRadius: Math.round(5 * sRatio) });
     $('.numlist').css({height: Math.round(54.2 * sRatio),fontSize:Math.round(35 * sRatio)})
     $('.dragselected').css({ width: Math.round(355 * sRatio), height: Math.round(200 * sRatio) });
-    $('.selectedframe').css({ width: Math.round(307 * sRatio), height: Math.round(185 * sRatio), boxShadow: `0px ${Math.round(30 * sRatio)}px ${Math.round(30 * sRatio)}px inset rgba(34, 34, 34, 0.452),0px ${-Math.round(30 * sRatio)}px ${Math.round(30 * sRatio)}px inset rgba(34, 34, 34, 0.466) ` });
-    $('.box').css({ width: Math.round(307 * sRatio), height: Math.round(185 * sRatio)})
+    $('.selectedframe').css({ width: Math.round(330 * sRatio), height: Math.round(185 * sRatio), boxShadow: `0px ${Math.round(30 * sRatio)}px ${Math.round(30 * sRatio)}px inset rgba(34, 34, 34, 0.452),0px ${-Math.round(30 * sRatio)}px ${Math.round(30 * sRatio)}px inset rgba(34, 34, 34, 0.466) ` });
+    $('.box').css({ width: Math.round(330 * sRatio), height: Math.round(185 * sRatio)})
     $('.img_box').css({ width: Math.round(330 * sRatio), height: Math.round(185 * sRatio),  backgroundPosition: `0 ${Math.round(30 * sRatio)}px`,backgroundSize:`${Math.round(330 * sRatio)}px ${Math.round(480 * sRatio)}px`})
     $('.movetopbtn').css({ width: Math.round(56 * sRatio), height: Math.round(39 * sRatio) });
     $('.movedownbtn').css({ width: Math.round(56 * sRatio), height: Math.round(39 * sRatio) });

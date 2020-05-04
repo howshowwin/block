@@ -304,7 +304,7 @@ body {
     /* background: #95C97E; */
     position: absolute;
     top: 46.4%;
-    left: 81.3%;
+    left: 80.8%;
     pointer-events: none;
     /* opacity: 0.5; */
 }
@@ -312,7 +312,7 @@ body {
 .box {
     position: absolute;
     top: 46.4%;
-    left: 81.3%;
+    left: 80.8%;
     overflow: hidden;
     cursor: pointer;
     scroll-snap-type: center;
