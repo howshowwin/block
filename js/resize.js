@@ -31,8 +31,8 @@ function convertSizeALL(className) {
     $(".background").css({ width: Math.round(w * sRatio), height: Math.round(h * sRatio) });
     $(".showbox").css({ width: Math.round(1480 * sRatio), height: Math.round(697 * sRatio) });
     $('.changeMoneyAreaTop').css({ width: Math.round(359 * sRatio), height: Math.round(31 * sRatio) });
-    $('.changeMoneyAreaBottom').css({ width: Math.round(358 * sRatio), height: Math.round(697 * sRatio) });
-    $('.change_btn').css({ width: Math.round(309 * sRatio), height: Math.round(83 * sRatio) });
+    $('.changeMoneyAreaBottom').css({ width: Math.round(385 * sRatio), height: Math.round(697 * sRatio) });
+    $('.change_btn').css({ width: Math.round(333 * sRatio), height: Math.round(83 * sRatio) });
     $('.close_btn').css({ width: Math.round(76 * sRatio), height: Math.round(77 * sRatio) });
     $('.useteach').css({ width: Math.round(263 * sRatio), height: Math.round(78 * sRatio) });
     $('.countpic').css({ width: Math.round(262 * sRatio), height: Math.round(163 * sRatio) });
