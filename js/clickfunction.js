@@ -3,17 +3,17 @@ if (set_pic_info.length > 1) {
     $('.info-btn-right').removeClass('display_none')
 }
 var picnowdisplay = 0
-var picenddisplay = set_pic_info.length -1
+var picenddisplay = set_pic_info.length - 1
 $('.info-btn-right').click(function () {
     picnowdisplay++
     $('.info-page').css({
         background: `url(setpic/${set_pic_info[picnowdisplay]})`,
         backgroundSize: "cover"
     })
-    if(picnowdisplay==picenddisplay){
+    if (picnowdisplay == picenddisplay) {
         $('.info-btn-right').addClass('display_none')
     }
-    if(picnowdisplay!=0){
+    if (picnowdisplay != 0) {
         $('.info-btn-left').removeClass('display_none')
     }
 })
@@ -23,10 +23,10 @@ $('.info-btn-left').click(function () {
         background: `url(setpic/${set_pic_info[picnowdisplay]})`,
         backgroundSize: "cover"
     })
-    if(picnowdisplay==0){
+    if (picnowdisplay == 0) {
         $('.info-btn-left').addClass('display_none')
     }
-    if(picnowdisplay!=picenddisplay){
+    if (picnowdisplay != picenddisplay) {
         $('.info-btn-right').removeClass('display_none')
     }
 
@@ -114,137 +114,136 @@ $('.movedownbtn').click(function () {
 
 
 
-var clickDisplayNoneThd
-var clickDisplayNoneHrd
-var clickDisplayNoneTen
-var clickDisplayNoneOne
+var clickDisplayNoneThd = 0
+var clickDisplayNoneHrd = 0
+var clickDisplayNoneTen = 0
+var clickDisplayNoneOne = 0
 
 
-$('.arrow1').click(function () {
-    $('.choosenum1').css({
-        transform: "scale(1)"
-
+$('.arrow1').click(function (e) {
+    e.stopPropagation();
+    $('.choosenum').not('.choosenum1').css({
+        transform: "scale(0)"
     })
-    setTimeout(function () {
-        clickDisplayNoneThd = 1
-    }, 100)
+    if (clickDisplayNoneThd == 0) {
+        $('.choosenum1').css({
+            transform: "scale(1)"
+        })
+
+        setTimeout(function () {
+            clickDisplayNoneThd = 1
+        }, 100)
+    } else if (clickDisplayNoneThd == 1) {
+        $('.choosenum1').css({
+            transform: "scale(0)"
+        })
+        clickDisplayNoneThd = 0
+    }
+ 
 })
 
-$('.arrow2').click(function () {
-    $('.choosenum2').css({
-        transform: "scale(1)"
-
+$('.arrow2').click(function (e) {
+    e.stopPropagation();
+    $('.choosenum').not('.choosenum2').css({
+        transform: "scale(0)"
     })
-    setTimeout(function () {
-        clickDisplayNoneHrd = 1
-    }, 100)
+    if (clickDisplayNoneHrd == 0) {
+        $('.choosenum2').css({
+            transform: "scale(1)"
+        })
+
+        setTimeout(function () {
+            clickDisplayNoneHrd = 1
+        }, 100)
+    } else if (clickDisplayNoneHrd == 1) {
+        $('.choosenum2').css({
+            transform: "scale(0)"
+        })
+        clickDisplayNoneHrd = 0
+    }
 })
-$('.arrow3').click(function () {
-    $('.choosenum3').css({
-        transform: "scale(1)"
-
+$('.arrow3').click(function (e) {
+    e.stopPropagation();
+    $('.choosenum').not('.choosenum3').css({
+        transform: "scale(0)"
     })
-    setTimeout(function () {
-        clickDisplayNoneTen = 1
-    }, 100)
+    if (clickDisplayNoneTen == 0) {
+        $('.choosenum3').css({
+            transform: "scale(1)"
+        })
+
+        setTimeout(function () {
+            clickDisplayNoneTen = 1
+        }, 100)
+    } else if (clickDisplayNoneTen == 1) {
+        $('.choosenum3').css({
+            transform: "scale(0)"
+        })
+        clickDisplayNoneTen = 0
+    }
 })
-$('.arrow4').click(function () {
-    $('.choosenum4').css({
-        transform: "scale(1)"
-
+$('.arrow4').click(function (e) {
+    e.stopPropagation();
+    $('.choosenum').not('.choosenum4').css({
+        transform: "scale(0)"
     })
-    setTimeout(function () {
-        clickDisplayNoneOne = 1
-    }, 100)
+    if (clickDisplayNoneOne == 0) {
+        $('.choosenum4').css({
+            transform: "scale(1)"
+        })
+
+        setTimeout(function () {
+            clickDisplayNoneOne = 1
+        }, 100)
+    } else if (clickDisplayNoneOne == 1) {
+        $('.choosenum4').css({
+            transform: "scale(0)"
+        })
+        clickDisplayNoneOne = 0
+    }
 })
 
 $('body').bind('click', function (event) {
     if (clickDisplayNoneThd == 1) {
-        var evt = event.srcElement ? event.srcElement : event.target;
-        var allele = []
 
-        var opop = event.target.classList.length
 
-        for (i = 0; i < opop; i++) {
-            allele.push(event.target.classList[i])
-
-        }
-
-        if (allele[1] == "arrow1") return;
-        else {
-
-            $('.choosenum1').css({
-                transform: "scale(0)"
-            })
-        }
-        clickDisplayNoneThd = 0
+        $('.choosenum1').css({
+            transform: "scale(0)"
+        })
     }
+    clickDisplayNoneThd = 0
 });
 $('body').bind('click', function (event) {
     if (clickDisplayNoneHrd == 1) {
-        var evt = event.srcElement ? event.srcElement : event.target;
-        var allele = []
 
-        var opop = event.target.classList.length
 
-        for (i = 0; i < opop; i++) {
-            allele.push(event.target.classList[i])
-
-        }
-
-        if (allele[1] == "arrow2") return;
-        else {
-
-            $('.choosenum2').css({
-                transform: "scale(0)"
-            })
-        }
-        clickDisplayNoneHrd = 0
+        $('.choosenum2').css({
+            transform: "scale(0)"
+        })
     }
+    clickDisplayNoneHrd = 0
+
 });
 $('body').bind('click', function (event) {
     if (clickDisplayNoneTen == 1) {
-        var evt = event.srcElement ? event.srcElement : event.target;
-        var allele = []
 
-        var opop = event.target.classList.length
 
-        for (i = 0; i < opop; i++) {
-            allele.push(event.target.classList[i])
-
-        }
-
-        if (allele[1] == "arrow3") return;
-        else {
-
-            $('.choosenum3').css({
-                transform: "scale(0)"
-            })
-        }
-        clickDisplayNoneTen = 0
+        $('.choosenum3').css({
+            transform: "scale(0)"
+        })
     }
+    clickDisplayNoneTen = 0
+    
 });
 $('body').bind('click', function (event) {
     if (clickDisplayNoneOne == 1) {
-        var evt = event.srcElement ? event.srcElement : event.target;
-        var allele = []
 
-        var opop = event.target.classList.length
 
-        for (i = 0; i < opop; i++) {
-            allele.push(event.target.classList[i])
-
-        }
-
-        if (allele[1] == "arrow4") return;
-        else {
-
-            $('.choosenum4').css({
-                transform: "scale(0)"
-            })
-        }
-        clickDisplayNoneOne = 0
+        $('.choosenum4').css({
+            transform: "scale(0)"
+        })
     }
+    clickDisplayNoneOne = 0
 });
 var togglecount = 0
 $('.openorclosecount_btn').click(function () {
@@ -417,6 +416,23 @@ $('.delete_btn').click(function () {
         arrayten = []
         arrayhun = []
         arrayths = []
+
+        clickappend_img_thdC = 0
+        clickrow_img_thdC = 0
+        clicklittlemove_img_thdC = 0
+
+        clickappend_img_hunC = 0
+        clickrow_img_hunC = 0
+        clicklittlemove_img_hunC = 0
+
+        clickappend_img_tenC = 0
+        clickrow_img_tenC = 0
+        clicklittlemove_img_tenC = 0
+
+        clickappend_img_oneC = 0
+        clickrow_img_oneC = 0
+        clicklittlemove_img_oneC = 0
+
     }
 
 
@@ -728,7 +744,7 @@ canvas.on('selection:updated', function (e) {
 
                         }
                         Array_sum = SumData(ArrTest)
-                        $(".count").val(Array_sum)
+                        $(".count").val(Array_sum + change_Array_sum)
                     }, 500)
 
 
@@ -864,7 +880,7 @@ canvas.on('object:selected', e => {
 
                             }
                             Array_sum = SumData(ArrTest)
-                            $(".count").val(Array_sum)
+                            $(".count").val(Array_sum + change_Array_sum)
                         }, 500)
 
 
@@ -940,7 +956,7 @@ canvas.on('object:scaling', function (e) {
     obj.setCoords();
     var brNew = obj.getBoundingRect();
 
-    if (((brNew.width + brNew.left) >= obj.canvas.width*0.80 - (20 * sRSS)) || ((brNew.height + brNew.top) >= obj.canvas.height - (20 * sRSS)) || ((brNew.left < (20 * sRSS)) || (brNew.top < (20 * sRSS)))) {
+    if (((brNew.width + brNew.left) >= obj.canvas.width * 0.80 - (20 * sRSS)) || ((brNew.height + brNew.top) >= obj.canvas.height - (20 * sRSS)) || ((brNew.left < (20 * sRSS)) || (brNew.top < (20 * sRSS)))) {
         obj.left = left1;
         obj.top = top1;
         obj.scaleX = scale1x;
@@ -962,7 +978,7 @@ canvas.on('object:rotating', function (e) {
     obj.setCoords();
     var brNew = obj.getBoundingRect();
 
-    if (((brNew.width + brNew.left) >= obj.canvas.width*0.80 - (20 * sRSS)) || ((brNew.height + brNew.top) >= obj.canvas.height - (20 * sRSS)) || ((brNew.left < (20 * sRSS)) || (brNew.top < (20 * sRSS)))) {
+    if (((brNew.width + brNew.left) >= obj.canvas.width * 0.80 - (20 * sRSS)) || ((brNew.height + brNew.top) >= obj.canvas.height - (20 * sRSS)) || ((brNew.left < (20 * sRSS)) || (brNew.top < (20 * sRSS)))) {
         obj.left = left1;
         obj.top = top1;
         obj.scaleX = scale1x;
@@ -1053,11 +1069,11 @@ canvas.on('object:moving', function (e) {
     obj.setCoords();
     console.log(e)
     // if ((obj.getBoundingRect().left + obj.getBoundingRect().width/2) > obj.canvas.width * 0.80 && obj.getBoundingRect().top + obj.getBoundingRect().height < obj.canvas.height * 0.65) {
-    var clientXnow = e.e.clientX
+    var clientXnow = e.e.clientX || e.e.targetTouches[0].clientX
 
-    if (isAndroid || isiOS) {
-        clientXnow = e.e.targetTouches[0].clientX
-    }
+    // if (isAndroid || isiOS) {
+    //     clientXnow = 
+    // }
 
 
     if (objjj == e.target) {
@@ -2593,7 +2609,7 @@ $('.change_btn').click(function () {
                 }
                 changeArray = []
                 changeArray = changeArray.concat(arrayOne)
-            
+
 
                 pusharray(changeArray)
                 change_Array_sum = SumData(stage)
@@ -3515,7 +3531,7 @@ $('.change_btn').click(function () {
                 changeArray = changeArray.concat(arrayOne)
                 changeArray = changeArray.concat(arrayten)
 
-            
+
 
                 pusharray(changeArray)
                 change_Array_sum = SumData(stage)
@@ -4411,7 +4427,7 @@ $('.change_btn').click(function () {
                 arrayhun = []
             }
 
-          
+
             if ((ch500 - 10) >= 0 && arrayten.length != 0) {
                 for (i = 0; i < arrayten.length; i++) {
                     ch500 = ch500 - 10
@@ -4487,42 +4503,206 @@ $('.change_btn').click(function () {
 
 })
 
-var clickappend = 0
-var clickrow = 0
-var clicklittlemove = 0
+var clickappend_img_thdC = 0
+var clickrow_img_thdC = 0
+var clicklittlemove_img_thdC = 0
+
+var clickappend_img_hunC = 0
+var clickrow_img_hunC = 0
+var clicklittlemove_img_hunC = 0
+
+var clickappend_img_tenC = 0
+var clickrow_img_tenC = 0
+var clicklittlemove_img_tenC = 0
+
+var clickappend_img_oneC = 0
+var clickrow_img_oneC = 0
+var clicklittlemove_img_oneC = 0
 
 
-$('.defaultImg').click(function (e) {
+$('.img_thdC').click(function (e) {
     let movingImage = e.target
     const image_qq = new fabric.Image(movingImage, {
         width: movingImage.naturalWidth,
         height: movingImage.naturalHeight,
         scaleX: movingImage.width / movingImage.naturalWidth,
         scaleY: movingImage.height / movingImage.naturalHeight,
-        top: 40 * sRSS + 110 * clickappend * sRSS,
-        left: 30 * sRSS + clickrow * 135 * sRSS + clicklittlemove * sRSS,
+        top: 40 * sRSS + 110 * clickappend_img_thdC * sRSS,
+        left: 30 * sRSS + clickrow_img_thdC * 135 * sRSS + clicklittlemove_img_thdC * sRSS,
         lockScalingFlip: true
     })
     image_qq.alt = 1
     image_qq.set({
         borderColor: '#01B0F1'
     })
-    clickappend++
-    if (clickappend == 5) {
-        clickrow++
-        clickappend = 0
+    clickappend_img_thdC++
+    if (clickappend_img_thdC == 5) {
+        clickrow_img_thdC++
+        clickappend_img_thdC = 0
     }
-    if (clickrow == 10) {
-        clickrow = 0
-        clicklittlemove += 10
+    if (clickrow_img_thdC == 2) {
+        clickrow_img_thdC = 0
+        clicklittlemove_img_thdC += 20
     }
-    if (clicklittlemove > 10) {
-        clicklittlemove = 0
+    if (clicklittlemove_img_thdC > 80) {
+        clicklittlemove_img_thdC = 0
     }
     image_q.push(image_qq)
 
     canvas.add(image_qq)
     movingImage = ""
+
+    setTimeout(function ww() {
+        var items = canvas.getObjects()
+        var Array_sum
+        var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+        for (i = 0; i < items.length; i++) {
+            ArrTest[i] = parseInt(items[i]._element.alt)
+
+        }
+        Array_sum = SumData(ArrTest)
+        $(".count").val(Array_sum + change_Array_sum)
+
+    }, 500)
+
+})
+
+
+
+$('.img_hunC').click(function (e) {
+    let movingImage = e.target
+    const image_qq = new fabric.Image(movingImage, {
+        width: movingImage.naturalWidth,
+        height: movingImage.naturalHeight,
+        scaleX: movingImage.width / movingImage.naturalWidth,
+        scaleY: movingImage.height / movingImage.naturalHeight,
+        top: 40 * sRSS + 110 * clickappend_img_hunC * sRSS,
+        left: 370 * sRSS + clickrow_img_hunC * 135 * sRSS + clicklittlemove_img_hunC * sRSS,
+        lockScalingFlip: true
+    })
+    image_qq.alt = 1
+    image_qq.set({
+        borderColor: '#01B0F1'
+    })
+    clickappend_img_hunC++
+    if (clickappend_img_hunC == 5) {
+        clickrow_img_hunC++
+        clickappend_img_hunC = 0
+    }
+    if (clickrow_img_hunC == 2) {
+        clickrow_img_hunC = 0
+        clicklittlemove_img_hunC += 20
+    }
+    if (clicklittlemove_img_hunC > 80) {
+        clicklittlemove_img_hunC = 0
+    }
+    image_q.push(image_qq)
+
+    canvas.add(image_qq)
+    movingImage = ""
+
+    setTimeout(function ww() {
+        var items = canvas.getObjects()
+        var Array_sum
+        var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+        for (i = 0; i < items.length; i++) {
+            ArrTest[i] = parseInt(items[i]._element.alt)
+
+        }
+        Array_sum = SumData(ArrTest)
+        $(".count").val(Array_sum + change_Array_sum)
+
+    }, 500)
+
+})
+
+
+
+$('.img_tenC').click(function (e) {
+    let movingImage = e.target
+    const image_qq = new fabric.Image(movingImage, {
+        width: movingImage.naturalWidth,
+        height: movingImage.naturalHeight,
+        scaleX: movingImage.width / movingImage.naturalWidth,
+        scaleY: movingImage.height / movingImage.naturalHeight,
+        top: 40 * sRSS + 110 * clickappend_img_tenC * sRSS,
+        left: 720 * sRSS + clickrow_img_tenC * 135 * sRSS + clicklittlemove_img_tenC * sRSS,
+        lockScalingFlip: true
+    })
+    image_qq.alt = 1
+    image_qq.set({
+        borderColor: '#01B0F1'
+    })
+    clickappend_img_tenC++
+    if (clickappend_img_tenC == 5) {
+        clickrow_img_tenC++
+        clickappend_img_tenC = 0
+    }
+    if (clickrow_img_tenC == 2) {
+        clickrow_img_tenC = 0
+        clicklittlemove_img_tenC += 20
+    }
+    if (clicklittlemove_img_tenC > 80) {
+        clicklittlemove_img_tenC = 0
+    }
+    image_q.push(image_qq)
+
+    canvas.add(image_qq)
+    movingImage = ""
+
+    setTimeout(function ww() {
+        var items = canvas.getObjects()
+        var Array_sum
+        var ArrTest = new Array();　// 宣告一個新的陣列為 ArrTest
+
+        for (i = 0; i < items.length; i++) {
+            ArrTest[i] = parseInt(items[i]._element.alt)
+
+        }
+        Array_sum = SumData(ArrTest)
+        $(".count").val(Array_sum + change_Array_sum)
+
+    }, 500)
+
+})
+
+
+
+
+$('.img_oneC').click(function (e) {
+    let movingImage = e.target
+    const image_qq = new fabric.Image(movingImage, {
+        width: movingImage.naturalWidth,
+        height: movingImage.naturalHeight,
+        scaleX: movingImage.width / movingImage.naturalWidth,
+        scaleY: movingImage.height / movingImage.naturalHeight,
+        top: 40 * sRSS + 80 * clickappend_img_oneC * sRSS,
+        left: 970 * sRSS + clickrow_img_oneC * 135 * sRSS + clicklittlemove_img_oneC * sRSS,
+        lockScalingFlip: true
+    })
+    image_qq.alt = 1
+    image_qq.set({
+        borderColor: '#01B0F1'
+    })
+    clickappend_img_oneC++
+    if (clickappend_img_oneC == 5) {
+        clickrow_img_oneC++
+        clickappend_img_oneC = 0
+    }
+    if (clickrow_img_oneC == 2) {
+        clickrow_img_oneC = 0
+        clicklittlemove_img_oneC += 20
+    }
+    if (clicklittlemove_img_oneC > 80) {
+        clicklittlemove_img_oneC = 0
+    }
+    image_q.push(image_qq)
+
+    canvas.add(image_qq)
+    movingImage = ""
+
     setTimeout(function ww() {
         var items = canvas.getObjects()
         var Array_sum
