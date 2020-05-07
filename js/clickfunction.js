@@ -1,4 +1,7 @@
-
+$('.info-page').css({
+    background: `url(setpic/${set_pic_info[0]})`,
+    backgroundSize: "cover"
+  })
 if (set_pic_info.length > 1) {
     $('.info-btn-right').removeClass('display_none')
 }
@@ -363,12 +366,7 @@ $('.useteach').click(function () {
     picnowdisplay = 0
 
     $('.mask').removeClass("display_none")
-    $('.info-page').css({
-        background: `url(setpic/${set_pic_info[picnowdisplay]})`,
-        backgroundSize: "cover"
-    })
-    $('.info-btn-right').removeClass('display_none')
-    $('.info-btn-left').addClass('display_none')
+
 })
 $('.btn_close_inset').click(function () {
     $('.mask').addClass("display_none")
